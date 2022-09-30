@@ -1,37 +1,52 @@
 import React from "react";
 import "./Main.css";
-import Card from "../Card/Card";
+import { useLocation } from "react-router-dom";
+import Root from "../routes/Root";
+import Timetable from "../routes/Timetable";
+import Users from "../routes/Users";
+import Students from "../routes/Students";
+import Sections from "../routes/Sections";
+import Exams from "../routes/Exams";
+import MyAccount from "../routes/MyAccount";
+import Classes from "../routes/Classes";
+import Subjects from "../routes/Subjects";
+import Administrative from "../routes/Administrative";
+import Dormitories from "../routes/Dormitories";
 
 
 const Main = props => {
+    const location = useLocation();
+    let pathName = location.pathname;
+    let Component;
+
+    if (pathName === "/") {
+        Component = Root;
+    } else if (pathName === "/timetable") {
+        Component = Timetable;
+    } else if (pathName === "/dormitories") {
+        Component = Dormitories;
+    } else if (pathName === "/users") {
+        Component = Users;
+    } else if (pathName === "/students") {
+        Component = Students;
+    } else if (pathName === "/sections") {
+        Component = Sections
+    } else if (pathName === "/exams") {
+        Component = Exams
+    } else if (pathName === "/myaccount") {
+        Component = MyAccount;
+    } else if (pathName === "/classes") {
+        Component = Classes;
+    } else if (pathName === "/subjects") {
+        Component = Subjects;
+    } else if (pathName === "/administrative") {
+        Component = Administrative;
+    }
+
+
     return (
         <React.Fragment>
-            <main className="Main">
-                <Card>some</Card>
-                <div className="Boxes">
-                    <Card
-                        className="Students"
-                    >
-                        Students
-                    </Card>
-                    <Card
-                        className="Teachers"
-                    >
-                        Teachers
-                    </Card>
-                    <Card
-                        className="Administrators"
-                    >
-                        Administrators
-                    </Card>
-                    <Card
-                        className="Parents"
-                    >
-                        Parents
-                    </Card>
-                </div>
-                <Card card title="TimeTable">Card</Card>
-            </main>
+            <Component />
         </React.Fragment>
     );
 };

@@ -5,11 +5,9 @@ import "./AsideNavigationItem.css";
 const AsideNavigationItem = props => {
     return (
         <li className="AsideNavigationItem">
-            <a href="#">
-                {
-                    props.children
-                }
-            </a>
+            {
+                props.children
+            }
         </li>
     );
 };

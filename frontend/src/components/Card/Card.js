@@ -11,17 +11,18 @@ const Card = props => {
         <div className={classNames.join(" ")}>
             {
                 props.card ? (
-                    <div>
-                        <div className="Card_Body">
+                    <React.Fragment>
+                        <div className="Card__Body">
                             {
                                 props.title
                             }
-                            <div>
-                                <pre>^  X</pre>
+                            <div className="Toggle__Remove">
+                                <div>^</div>
+                                <div>X</div>
                             </div>
                         </div>
                         <hr />
-                    </div>
+                    </React.Fragment>
                 ) : null
 
             }

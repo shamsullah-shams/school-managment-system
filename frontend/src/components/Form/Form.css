@@ -1,0 +1,25 @@
+.Form {
+    width: 70%;
+}
+
+.Form__Element {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.Form__Element>label {
+    width: 20%;
+}
+
+.Form__Element>input,
+.Form__Element>select {
+    width: 75%;
+    padding: 7px 16px;
+    border: 0.5px solid rgb(212, 211, 211);
+}
+
+option>div {
+    margin: 100px;
+}

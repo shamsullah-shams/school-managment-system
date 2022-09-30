@@ -4,15 +4,22 @@
     margin: 15px 20px;
     border: 0.5px solid rgb(212, 211, 211);
     box-shadow: 2px 2px 2px 2xp grey;
+    padding: 20px 20px;
 }
 
-.Card_Body {
-    margin: 10px 15px;
+hr {
+    border: 0.01px solid rgb(212, 211, 211);
+    border-bottom: none;
+}
+
+.Card__Body {
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-self: center;
-    padding: 0 16px;
+    /* padding: 0 16px; */
+    margin: 8px 0;
+    padding: 7px 16px;
 }
 
 .Administrators {
@@ -29,4 +36,16 @@
 
 .Parents {
     background-color: #66bb6a;
+}
+
+.Calendar {
+    width: none !important;
+}
+
+
+.Toggle__Remove {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
 }

@@ -7,6 +7,7 @@
     align-items: center;
 }
 
-.AsideNavigationItems>li>a {
+.Links {
     color: white;
+    text-decoration: none;
 }

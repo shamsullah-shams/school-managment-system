@@ -4,4 +4,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 10px;
+}
+
+.Project__Name {
+    width: 325px;
+
+}
+
+.Header__Body {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }

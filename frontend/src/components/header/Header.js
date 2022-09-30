@@ -6,10 +6,10 @@ import "./Header.css";
 const Header = props => {
     return (
         <header className="Header">
-            <div>
+            <div className="Project__Name">
                 School Management System
             </div>
-            <div>
+            <div className="Header__Body">
                 <div>
                     meunu
                 </div>
