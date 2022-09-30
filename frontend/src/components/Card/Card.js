@@ -1,20 +1,37 @@
 import React from "react";
 import "./Card.css";
-import { UilUsersAlt } from '@iconscout/react-unicons'
+
+
 
 const Card = props => {
 
-    let classes = ["Card", props.className];
-
+    let classNames = [props.className, "Card"]
 
     return (
-        <div className={classes.join(" ")}>
+        <div className={classNames.join(" ")}>
+            {
+                props.card ? (
+                    <div>
+                        <div className="Card_Body">
+                            {
+                                props.title
+                            }
+                            <div>
+                                <pre>^  X</pre>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                ) : null
+
+            }
             {
                 props.children
             }
         </div>
     );
 };
+
 
 
 export default Card;

@@ -1,25 +1,36 @@
 import React from "react";
-import Card from "../Card/Card";
-import { UilUsersAlt } from '@iconscout/react-unicons'
 import "./Main.css";
+import Card from "../Card/Card";
 
 
 const Main = props => {
     return (
         <React.Fragment>
             <main className="Main">
-                <div className="Main__Header">
-                    sdjfk
-                </div>
-                <div className="ClassForCards">
-                    <Card className="Users">
-                        <UilUsersAlt />
-                        user
+                <Card>some</Card>
+                <div className="Boxes">
+                    <Card
+                        className="Students"
+                    >
+                        Students
                     </Card>
-                    <Card className="Students">students</Card>
-                    <Card className="Parents">parents</Card>
-                    <Card className="Teachers">Teachers</Card>
+                    <Card
+                        className="Teachers"
+                    >
+                        Teachers
+                    </Card>
+                    <Card
+                        className="Administrators"
+                    >
+                        Administrators
+                    </Card>
+                    <Card
+                        className="Parents"
+                    >
+                        Parents
+                    </Card>
                 </div>
+                <Card card title="TimeTable">Card</Card>
             </main>
         </React.Fragment>
     );
