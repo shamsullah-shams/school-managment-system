@@ -1,0 +1,12 @@
+.AsideNavigationItems {
+    display: flex;
+    flex-direction: column;
+    background-color: #545051;
+    width: 270px;
+    height: 100vh;
+    align-items: center;
+}
+
+.AsideNavigationItems>li>a {
+    color: white;
+}

@@ -1,0 +1,26 @@
+.Card {
+    width: 23%;
+    height: 100px;
+    padding: 40px;
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-top: 20px;
+    color: white;
+}
+
+
+.Users {
+    background-color: #29b6f6;
+}
+
+.Teachers {
+    background-color: #5c6bc0;
+}
+
+.Students {
+    background-color: #ef5350;
+}
+
+.Parents {
+    background-color: #66bb6a;
+}
