@@ -17,9 +17,7 @@ hr {
     justify-content: space-between;
     align-items: center;
     align-self: center;
-    /* padding: 0 16px; */
-    margin: 8px 0;
-    padding: 7px 16px;
+    margin-bottom: 30px;
 }
 
 .Administrators {

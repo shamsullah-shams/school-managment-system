@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
-
-
+import { ImCross } from "react-icons/im";
+import { BsChevronUp, BsChevronDown } from "react-icons/bs";
 
 const Card = props => {
 
@@ -17,8 +17,8 @@ const Card = props => {
                                 props.title
                             }
                             <div className="Toggle__Remove">
-                                <div>^</div>
-                                <div>X</div>
+                                <BsChevronUp />
+                                <ImCross />
                             </div>
                         </div>
                         <hr />

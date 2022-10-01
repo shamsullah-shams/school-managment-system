@@ -1,45 +1,64 @@
 import React from "react";
-import AsideNavigationItem from "./AsideNavigationItem/AsideNavigationItem";
 import "./AsideNavigationItems.css";
-import { Link } from "react-router-dom"
-
+import { NavLink } from "react-router-dom"
+import { AiOutlineHome } from "react-icons/ai";
+import { HiAcademicCap, HiHome, HiChartBar } from "react-icons/hi"
+import { MdOutlineAdminPanelSettings, MdLocationOn } from "react-icons/md"
+import { FaUsers } from "react-icons/fa"
+import { HiUsers } from "react-icons/hi"
+import { SiGoogleclassroom } from "react-icons/si"
+import { ImBooks } from "react-icons/im";
+import { RiAccountCircleLine } from "react-icons/ri";
 
 const AsideNavigationItems = props => {
+
+
     return (
         <div className="AsideNavigationItems">
-            <Link to="/" className="Links">
-                <AsideNavigationItem>Dashboard</AsideNavigationItem>
-            </Link>
-            <Link to="/timetable" className="Links">
-                <AsideNavigationItem>Academics</AsideNavigationItem>
-            </Link>
-            <Link to="/administrative" className="Links">
-                <AsideNavigationItem>Administrative</AsideNavigationItem>
-            </Link>
-            <Link to="/students" className="Links">
-                <AsideNavigationItem>Students</AsideNavigationItem>
-            </Link>
-            <Link to="/users" className="Links">
-                <AsideNavigationItem>Users</AsideNavigationItem>
-            </Link>
-            <Link to="/classes" className="Links">
-                <AsideNavigationItem>Classes</AsideNavigationItem>
-            </Link>
-            <Link to="/dormitories" className="Links">
-                <AsideNavigationItem>Dormitories</AsideNavigationItem>
-            </Link>
-            <Link to="/sections" className="Links">
-                <AsideNavigationItem>Sections</AsideNavigationItem>
-            </Link>
-            <Link to="/subjects" className="Links">
-                <AsideNavigationItem>Subjects</AsideNavigationItem>
-            </Link>
-            <Link to="/exams" className="Links">
-                <AsideNavigationItem>Exams</AsideNavigationItem>
-            </Link>
-            <Link to="/myaccount" className="Links">
-                <AsideNavigationItem>My Account</AsideNavigationItem>
-            </Link>
+            <NavLink to="/" className="Links" end>
+                <AiOutlineHome />
+                <span>Dashboard</span>
+            </NavLink>
+            <NavLink to="/timetable" className="Links">
+                <HiAcademicCap />
+                <span>Academics</span>
+            </NavLink>
+            <NavLink to="/administrative" className="Links">
+                <MdOutlineAdminPanelSettings />
+                <span>Administrative</span>
+            </NavLink>
+            <NavLink to="/students" className="Links">
+                <HiUsers />
+                <span>Students</span>
+            </NavLink>
+            <NavLink to="/users" className="Links">
+                <FaUsers />
+                <span>Users</span>
+            </NavLink>
+            <NavLink to="/classes" className="Links">
+                <SiGoogleclassroom />
+                <span>Classes</span>
+            </NavLink>
+            <NavLink to="/dormitories" className="Links">
+                <HiHome />
+                <span>Dormitories</span>
+            </NavLink>
+            <NavLink to="/sections" className="Links">
+                <HiChartBar />
+                <span>Sections</span>
+            </NavLink>
+            <NavLink to="/subjects" className="Links">
+                <MdLocationOn />
+                <span>Subjects</span>
+            </NavLink>
+            <NavLink to="/exams" className="Links">
+                <ImBooks />
+                <span>Exams</span>
+            </NavLink>
+            <NavLink to="/myaccount" className="Links">
+                <RiAccountCircleLine />
+                <span>My Account</span>
+            </NavLink>
         </div>
     );
 };

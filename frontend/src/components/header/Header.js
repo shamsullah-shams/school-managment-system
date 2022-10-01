@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 
 
 
@@ -10,9 +11,7 @@ const Header = props => {
                 School Management System
             </div>
             <div className="Header__Body">
-                <div>
-                    meunu
-                </div>
+                <AiOutlineMenuFold />
                 <div>
                     user
                 </div>
