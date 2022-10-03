@@ -20,21 +20,6 @@ hr {
     margin-bottom: 30px;
 }
 
-.Administrators {
-    background-color: #29b6f6;
-}
-
-.Teachers {
-    background-color: #5c6bc0;
-}
-
-.Students {
-    background-color: #ef5350;
-}
-
-.Parents {
-    background-color: #66bb6a;
-}
 
 .Calendar {
     width: none !important;

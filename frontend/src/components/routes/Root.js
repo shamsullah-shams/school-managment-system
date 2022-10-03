@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import Card from "../Card/Card";
 import Calender from "../Calender/Calender";
-import { FaUsers } from "react-icons/fa"
+import { FaUsers, FaHandPointUp, FaUserAlt } from "react-icons/fa"
+import { HiUsers } from "react-icons/hi";
 import Box from "../Box/Box";
 
 
@@ -16,10 +17,22 @@ const Root = props => {
         <main className="Main">
             <Card>some</Card>
             <div className="Boxes">
-                <Box>Students</Box>
-                <Box>Teacher</Box>
-                <Box>Administrators</Box>
-                <Box>Parents</Box>
+                <Box className="Students">
+                    Students
+                    <FaUsers />
+                </Box>
+                <Box className="Teachers">
+                    Teacher
+                    <HiUsers />
+                </Box>
+                <Box className="Administrators">
+                    Administrators
+                    <FaHandPointUp />
+                </Box>
+                <Box className="Parents">
+                    Parents
+                    <FaUserAlt />
+                </Box>
             </div>
             {
                 showContent ?

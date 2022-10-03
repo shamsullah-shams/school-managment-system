@@ -1,4 +1,31 @@
 .Box {
-    border: 1px solid black;
+    border: 1px solid rgb(185, 184, 184);
     padding: 10px 12px;
+    display: inline-block;
+    justify-content: space-between;
+    font-size: 15px;
+    vertical-align: bottom;
+    border-radius: 3px;
+    color: white;
+}
+
+.Box>svg {
+    margin-left: 20px;
+    font-size: 50px;
+}
+
+.Students {
+    background-color: #29b6f6;
+}
+
+.Teachers {
+    background-color: #ef5350;
+}
+
+.Administrators {
+    background-color: #66bb6a;
+}
+
+.Parents {
+    background-color: #5c6bc0;
 }
