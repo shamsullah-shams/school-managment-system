@@ -44,11 +44,11 @@ const AsideNavigationItems = props => {
                 <Span title="Administrative" />
             </NavLink>
             <NavLink to="/students" className="Links">
-                <HiUsers />
+                <FaUsers />
                 <Span title="Students" />
             </NavLink>
             <NavLink to="/users" className="Links">
-                <FaUsers />
+                <HiUsers />
                 <Span title="Users" />
             </NavLink>
             <NavLink to="/classes" className="Links">

@@ -5,7 +5,6 @@ import Row from "../UI/Row/Row";
 import InputElement from "../Form/FormElement/InputElement";
 import SelectElement from "../Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
-import "./Students.css";
 
 
 

@@ -12,10 +12,6 @@ import Classes from "../routes/Classes";
 import Subjects from "../routes/Subjects";
 import Administrative from "../routes/Administrative";
 import Dormitories from "../routes/Dormitories";
-import StudentInfo from "../routes/StudentInfo";
-import GraduatedStu from "../routes/GraduatedStu";
-import StudentPromotion from "../routes/StudentPromotion";
-import Admitstudent from "../AdmitStudent/AdmitStudent";
 
 
 const Main = props => {
@@ -46,14 +42,6 @@ const Main = props => {
         Component = Subjects;
     } else if (pathName === "/payments") {
         Component = Administrative;
-    } else if (pathName === "/studentinfo") {
-        Component = StudentInfo;
-    } else if (pathName === "/graduatedstudents") {
-        Component = GraduatedStu;
-    } else if (pathName === "/studentpromotion") {
-        Component = StudentPromotion;
-    } else if (pathName === "/admitstudent") {
-        Component = Admitstudent;
     }
 
 

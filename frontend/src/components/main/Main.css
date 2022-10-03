@@ -6,4 +6,9 @@
 .Boxes {
     display: flex;
     flex-direction: row;
+    margin: 20px;
+    border: 1px solid black;
+    width: 97%;
+    padding: 10px 20px;
+    justify-content: space-between;
 }
