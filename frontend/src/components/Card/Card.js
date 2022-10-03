@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Card.css";
 import { ImCross } from "react-icons/im";
 import { BsChevronUp, BsChevronDown } from "react-icons/bs";
+import Context from "../../Cotext";
+
 
 const Card = props => {
+
+
 
     let classNames = [props.className, "Card"]
 
@@ -18,7 +22,7 @@ const Card = props => {
                             }
                             <div className="Toggle__Remove">
                                 <BsChevronUp />
-                                <ImCross />
+                                <div onClick={props.onClick} >X</div>
                             </div>
                         </div>
                         <hr />

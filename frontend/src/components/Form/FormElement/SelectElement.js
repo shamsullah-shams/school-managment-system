@@ -4,11 +4,11 @@ import React from "react";
 const SelectElement = props => {
     return (
         <div className="Form__Element">
-            <label>{props.label}<span>*</span></label>
+            <div>{props.label}<span>*</span></div>
             <select>
                 {
                     props.options.map(op => (
-                        <option>{op}</option>
+                        <option key={op}>{op}</option>
                     ))
                 }
             </select>

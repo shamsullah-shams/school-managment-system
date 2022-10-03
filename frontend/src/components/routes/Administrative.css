@@ -1,0 +1,22 @@
+.Buutons__Group {
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Buutons__Group>button {
+    border: none;
+    background-color: transparent;
+    padding-bottom: 2px;
+    margin-right: 5px;
+}
+
+.Buutons__Group>button:hover,
+.Buutons__Group>button:active {
+    border-bottom: 2px solid black;
+}
+
+.active {
+    border-bottom: 2px solid black !important;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Main.css";
 import { useLocation } from "react-router-dom";
 import Root from "../routes/Root";
@@ -12,9 +12,14 @@ import Classes from "../routes/Classes";
 import Subjects from "../routes/Subjects";
 import Administrative from "../routes/Administrative";
 import Dormitories from "../routes/Dormitories";
+import StudentInfo from "../routes/StudentInfo";
+import GraduatedStu from "../routes/GraduatedStu";
+import StudentPromotion from "../routes/StudentPromotion";
+import Admitstudent from "../AdmitStudent/AdmitStudent";
 
 
 const Main = props => {
+
     const location = useLocation();
     let pathName = location.pathname;
     let Component;
@@ -39,8 +44,16 @@ const Main = props => {
         Component = Classes;
     } else if (pathName === "/subjects") {
         Component = Subjects;
-    } else if (pathName === "/administrative") {
+    } else if (pathName === "/payments") {
         Component = Administrative;
+    } else if (pathName === "/studentinfo") {
+        Component = StudentInfo;
+    } else if (pathName === "/graduatedstudents") {
+        Component = GraduatedStu;
+    } else if (pathName === "/studentpromotion") {
+        Component = StudentPromotion;
+    } else if (pathName === "/admitstudent") {
+        Component = Admitstudent;
     }
 
 

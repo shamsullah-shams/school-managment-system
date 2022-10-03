@@ -1,0 +1,17 @@
+.Buttons {
+    display: flex;
+}
+
+.Buttons>button {
+    margin: 0 10px;
+    width: 100px;
+    padding: 8px 16px;
+    border-radius: 3px;
+    border: 0.5px solid rgb(212, 211, 211);
+
+}
+
+.Next {
+    background-color: rgb(86, 86, 252);
+    color: white;
+}

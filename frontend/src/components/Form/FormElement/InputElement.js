@@ -1,14 +1,14 @@
 import React from "react";
 
 
-const FormElement = props => {
+const InputElement = props => {
     return (
         <div className="Form__Element">
-            <label>{props.label}<span>*</span></label>
+            <div>{props.label}<span>*</span></div>
             <input {...props} />
         </div>
     );
 };
 
 
-export default FormElement;
+export default InputElement;

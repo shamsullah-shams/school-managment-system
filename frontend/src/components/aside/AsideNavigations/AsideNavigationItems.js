@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./AsideNavigationItems.css";
 import { NavLink } from "react-router-dom"
 import { AiOutlineHome } from "react-icons/ai";
@@ -9,57 +9,73 @@ import { HiUsers } from "react-icons/hi"
 import { SiGoogleclassroom } from "react-icons/si"
 import { ImBooks } from "react-icons/im";
 import { RiAccountCircleLine } from "react-icons/ri";
+import Span from "./Span";
+import Context from "../../../Cotext";
 
 const AsideNavigationItems = props => {
 
+    const [showStudentSubMenu, setShowStudentSubMenu] = useState(false);
+    const [showAdminSubMenu, setShowAdminSubmenu] = useState(false);
+
+    const { showSideBarSpans } = useContext(Context);
+
+    const showStudentSubMenuHandler = () => {
+        setShowAdminSubmenu(false);
+        setShowStudentSubMenu(!showStudentSubMenu);
+    }
+    const showAdminSubMenuHandler = () => {
+        setShowStudentSubMenu(false);
+        setShowAdminSubmenu(!showAdminSubMenu);
+    }
+
 
     return (
-        <div className="AsideNavigationItems">
+        <nav className="AsideNavigationItems">
             <NavLink to="/" className="Links" end>
                 <AiOutlineHome />
-                <span>Dashboard</span>
+                <Span title="Dashboard" />
             </NavLink>
             <NavLink to="/timetable" className="Links">
                 <HiAcademicCap />
-                <span>Academics</span>
+                <Span title="Academics" />
             </NavLink>
-            <NavLink to="/administrative" className="Links">
+            <NavLink className="Links" to="/payments">
                 <MdOutlineAdminPanelSettings />
-                <span>Administrative</span>
+                <Span title="Administrative" />
             </NavLink>
             <NavLink to="/students" className="Links">
                 <HiUsers />
-                <span>Students</span>
+                <Span title="Students" />
             </NavLink>
             <NavLink to="/users" className="Links">
                 <FaUsers />
-                <span>Users</span>
+                <Span title="Users" />
             </NavLink>
             <NavLink to="/classes" className="Links">
                 <SiGoogleclassroom />
-                <span>Classes</span>
+                <Span title="Classes" />
             </NavLink>
             <NavLink to="/dormitories" className="Links">
                 <HiHome />
-                <span>Dormitories</span>
+                <Span title="Dormitories" />
             </NavLink>
             <NavLink to="/sections" className="Links">
                 <HiChartBar />
-                <span>Sections</span>
+                <Span title="Sections" />
             </NavLink>
             <NavLink to="/subjects" className="Links">
                 <MdLocationOn />
-                <span>Subjects</span>
+                <Span title="Subjects" />
             </NavLink>
             <NavLink to="/exams" className="Links">
                 <ImBooks />
-                <span>Exams</span>
+                <Span title="Exams" />
             </NavLink>
             <NavLink to="/myaccount" className="Links">
                 <RiAccountCircleLine />
-                <span>My Account</span>
+                <Span title="My Account" />
             </NavLink>
-        </div>
+        </nav>
     );
 };
 
