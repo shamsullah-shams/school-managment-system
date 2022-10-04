@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 
@@ -81,8 +81,8 @@ const MyAccount = props => {
             <Card card title="Manage Account">
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={changePassword ? "active" : ""} onClick={changePasswordHandler}>Change Password</button>
-                        <button className={manageAccount ? "active" : ""} onClick={manageAccountHandler}>Manage Profile</button>
+                        <button className={changePassword ? "active__button" : ""} onClick={changePasswordHandler}>Change Password</button>
+                        <button className={manageAccount ? "active__button" : ""} onClick={manageAccountHandler}>Manage Profile</button>
                     </div>
                 </Row>
                 {

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import Card from "../Card/Card";
-import Calender from "../Calender/Calender";
+import Card from "../UI/Card/Card";
+import Calender from "../UI/Calender/Calender";
 import { FaUsers, FaHandPointUp, FaUserAlt } from "react-icons/fa"
 import { HiUsers } from "react-icons/hi";
-import Box from "../Box/Box";
+import Box from "../UI/Box/Box";
+import "../Root.css";
 
 
 

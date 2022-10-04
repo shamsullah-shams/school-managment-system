@@ -18,7 +18,7 @@ function App() {
             element={<Dashboard />}
           />
           <Route
-            path="/timetable"
+            path="/academics"
             element={<Dashboard />}
           />
           <Route
@@ -49,11 +49,7 @@ function App() {
             element={<Dashboard />}
           />
           <Route
-            path="/payments"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/dormitories"
+            path="/administrative"
             element={<Dashboard />}
           />
           <Route

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-// import CreateUser from "../CreateUser/CreateUser";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
+import "../Administrative.css";
 
 
 
@@ -48,11 +48,11 @@ const Classes = props => {
 
     return (
         <main className="Main">
-            <Card card title="Manage users">
+            <Card card title="Manage Classes">
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={createClass ? "active" : ""} onClick={createClassHandler}>Create User</button>
-                        <button className={manageClasses ? "active" : ""} onClick={manageClassesHandler}>Manage Users</button>
+                        <button className={createClass ? "active__button" : ""} onClick={createClassHandler}>Create User</button>
+                        <button className={manageClasses ? "active__button" : ""} onClick={manageClassesHandler}>Manage Users</button>
                     </div>
                 </Row>
                 {

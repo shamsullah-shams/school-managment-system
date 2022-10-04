@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
 import Row from "../UI/Row/Row";
-import "./Administrative.css";
+import "../Root.css";
 
 const CreatePayments = () => {
     return (
@@ -87,9 +87,9 @@ const Administrative = props => {
             <Card card title="Manage Payments" >
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={createPayment ? "active" : ""} onClick={createPaymenthandler}>create payment</button>
-                        <button className={managePayments ? "active" : ""} onClick={managePaymentsHandler}>manage payments</button>
-                        <button className={studentPayments ? "active" : ""} onClick={studentPaymentsHandler}>student payments</button>
+                        <button className={createPayment ? "active__button" : ""} onClick={createPaymenthandler}>create payment</button>
+                        <button className={managePayments ? "active__button" : ""} onClick={managePaymentsHandler}>manage payments</button>
+                        <button className={studentPayments ? "active__button" : ""} onClick={studentPaymentsHandler}>student payments</button>
                     </div>
                 </Row>
                 {

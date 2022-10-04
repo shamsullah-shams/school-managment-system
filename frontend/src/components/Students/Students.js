@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-import Form from "../Form/Form";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
 import Row from "../UI/Row/Row";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
+import "../Root.css";
 
 
 
@@ -101,10 +102,10 @@ const Students = props => {
             <Card card title="Manage Students" >
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={admitStudent ? "active" : ""} onClick={admitStudentHandler}>Admit Student</button>
-                        <button className={studentInfo ? "active" : ""} onClick={studentInfoHandler}>Student information</button>
-                        <button className={studentPromotion ? "active" : ""} onClick={studentPromotionHandler}>Student Promotion</button>
-                        <button className={graduatedStudents ? "active" : ""} onClick={graduatedStudentsHandler}>Graduated Student</button>
+                        <button className={admitStudent ? "active__button" : ""} onClick={admitStudentHandler}>Admit Student</button>
+                        <button className={studentInfo ? "active__button" : ""} onClick={studentInfoHandler}>Student information</button>
+                        <button className={studentPromotion ? "active__button" : ""} onClick={studentPromotionHandler}>Student Promotion</button>
+                        <button className={graduatedStudents ? "active__button" : ""} onClick={graduatedStudentsHandler}>Graduated Student</button>
                     </div>
                 </Row>
                 {

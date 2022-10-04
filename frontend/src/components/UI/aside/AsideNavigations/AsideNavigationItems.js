@@ -10,7 +10,7 @@ import { SiGoogleclassroom } from "react-icons/si"
 import { ImBooks } from "react-icons/im";
 import { RiAccountCircleLine } from "react-icons/ri";
 import Span from "./Span";
-import Context from "../../../Cotext";
+import Context from "../../../../Cotext";
 
 const AsideNavigationItems = props => {
 
@@ -35,11 +35,11 @@ const AsideNavigationItems = props => {
                 <AiOutlineHome />
                 <Span title="Dashboard" />
             </NavLink>
-            <NavLink to="/timetable" className="Links">
+            <NavLink to="/academics" className="Links">
                 <HiAcademicCap />
                 <Span title="Academics" />
             </NavLink>
-            <NavLink className="Links" to="/payments">
+            <NavLink className="Links" to="/administrative">
                 <MdOutlineAdminPanelSettings />
                 <Span title="Administrative" />
             </NavLink>
@@ -54,10 +54,6 @@ const AsideNavigationItems = props => {
             <NavLink to="/classes" className="Links">
                 <SiGoogleclassroom />
                 <Span title="Classes" />
-            </NavLink>
-            <NavLink to="/dormitories" className="Links">
-                <HiHome />
-                <Span title="Dormitories" />
             </NavLink>
             <NavLink to="/sections" className="Links">
                 <HiChartBar />

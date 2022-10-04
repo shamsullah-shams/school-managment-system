@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./Header.css";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
-import Context from "../../Cotext";
+import Context from "../../../Cotext";
 
 
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 
@@ -56,8 +56,8 @@ const Subjects = props => {
             <Card card title="Manage Subjects">
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={addSubject ? "active" : ""} onClick={addSubjectHandler}>Add Subject</button>
-                        <button className={manageSubjects ? "active" : ""} onClick={manageSubjectsHandler}>Manage Subjects</button>
+                        <button className={addSubject ? "active__button" : ""} onClick={addSubjectHandler}>Add Subject</button>
+                        <button className={manageSubjects ? "active__button" : ""} onClick={manageSubjectsHandler}>Manage Subjects</button>
                     </div>
                 </Row>
                 {

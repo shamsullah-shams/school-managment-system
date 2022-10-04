@@ -1,0 +1,35 @@
+.Main {
+    width: 100%;
+
+}
+
+.Boxes {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    width: 97%;
+    justify-content: space-between;
+}
+
+.Buutons__Group {
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Buutons__Group>button {
+    border: none;
+    background-color: transparent;
+    padding-bottom: 2px;
+    margin-right: 15px;
+}
+
+.Buutons__Group>button:hover,
+.Buutons__Group>button:active {
+    border-bottom: 2px solid black;
+}
+
+.active__button {
+    border-bottom: 2px solid black !important;
+}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import Card from "../UI/Card/Card";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 
@@ -66,8 +66,8 @@ const Timetable = props => {
             <Card card title="Manage Timetables">
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={createTimeTable ? "active" : ""} onClick={createTimeTableHandler}>Create Timetable</button>
-                        <button className={manageTimeTables ? "active" : ""} onClick={manageTimeTablesHandler}>Manage Timetables</button>
+                        <button className={createTimeTable ? "active__button" : ""} onClick={createTimeTableHandler}>Create Timetable</button>
+                        <button className={manageTimeTables ? "active__button" : ""} onClick={manageTimeTablesHandler}>Manage Timetables</button>
                     </div>
                 </Row>
                 {

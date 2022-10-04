@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
+import Card from "../UI/Card/Card";
 // import CreateUser from "../CreateUser/CreateUser";
-import Form from "../Form/Form";
-import InputElement from "../Form/FormElement/InputElement";
-import SelectElement from "../Form/FormElement/SelectElement";
+import Form from "../UI/Form/Form";
+import InputElement from "../UI/Form/FormElement/InputElement";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 
@@ -51,11 +51,11 @@ const Sections = props => {
 
     return (
         <main className="Main">
-            <Card card title="Manage users">
+            <Card card title="Manage Sections">
                 <Row>
                     <div className="Buutons__Group">
-                        <button className={createSection ? "active" : ""} onClick={createSectionHandler}>Create Section</button>
-                        <button className={manageSections ? "active" : ""} onClick={manageSectionsHandler}>Manage Sections</button>
+                        <button className={createSection ? "active__button" : ""} onClick={createSectionHandler}>Create Section</button>
+                        <button className={manageSections ? "active__button" : ""} onClick={manageSectionsHandler}>Manage Sections</button>
                     </div>
                 </Row>
                 {
