@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, DATE } from "sequelize";
 import sequelize from "../config/database.js";
 
 
@@ -22,6 +22,10 @@ const Payment = sequelize.define("Payment", {
         allowNull: false,
     },
     description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    year: {
         type: DataTypes.STRING,
         allowNull: false,
     }

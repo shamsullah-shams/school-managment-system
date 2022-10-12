@@ -62,10 +62,15 @@ export const RagisterStudent = async (req, res, next) => {
 
 export const CreateTimeTable = (req, res, next) => {
     const { timeTable } = req.body;
+
+    const year = new Date().toISOString().split("-")[0];
+
+
     const NT = new TimeTable({
         name: timeTable.name,
         className: timeTable.className,
         type: timeTable.type,
+        year: year
     });
     try {
         const result = NT.save();
@@ -79,11 +84,14 @@ export const CreateTimeTable = (req, res, next) => {
 export const CreatePayment = async (req, res, next) => {
     const { payment } = req.body;
 
+    // const year = new Date().toISOString().split("-")[0];
+
     const newPayment = new Payment({
         title: payment.title,
         className: payment.class,
         amount: payment.amount,
         description: payment.description,
+        year: "2023"
     });
 
     try {
@@ -92,8 +100,6 @@ export const CreatePayment = async (req, res, next) => {
     } catch (error) {
         return console.log(error);
     }
-
-
 }
 
 
@@ -174,4 +180,69 @@ export const CreateSubject = async (req, res, next) => {
         return res.send(error);
     }
 
+}
+
+
+
+// Return all TimeTables from database 
+export const GetAllTimeTables = async (req, res, next) => {
+    try {
+        const data = await TimeTable.findAll();
+
+        const timeTables = data.map(d => {
+            return [
+                d.dataValues.id,
+                d.dataValues.name,
+                d.dataValues.className,
+                d.dataValues.type,
+                d.dataValues.year,
+            ]
+        });
+        console.log(timeTables);
+        return res.send(timeTables);
+
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
+
+// Return Payments of One Year from Database 
+// export const GetAllPayments = async (req, res, next) => {
+//     console.log("sime")
+//     // try {
+//     //     const payments = await Payment.findAll();
+//     //     console.log(payments);
+//     //     return res.send(payments);
+//     // } catch (error) {
+//     //     return res.send(payments);
+//     // }
+// }
+
+
+export const GetPaymentsOfOneYear = async (req, res, next) => {
+    const { year } = req.params;
+    try {
+        const payments = await Payment.findAll({ where: { year: year } });
+        const newArrayOfPayments = payments.map(sp => {
+            return {
+                id: sp.dataValues.id,
+                title: sp.dataValues.title,
+                className: sp.dataValues.className,
+                amount: sp.dataValues.amount,
+                description: sp.dataValues.description,
+                year: sp.dataValues.year,
+            }
+        });
+        return res.send(newArrayOfPayments);
+    } catch (error) {
+        return console.log(error.message);
+    }
+}
+
+
+export const GetSelectedClassStudends = (req, res, next) => {
+    const { selectedClass } = req.params;
+    console.log(selectedClass);
+    return res.send("success");
 }

@@ -18,6 +18,7 @@ code {
 }
 
 
-svg {
+svg,
+button {
   cursor: pointer;
 }
