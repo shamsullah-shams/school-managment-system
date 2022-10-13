@@ -241,8 +241,13 @@ export const GetPaymentsOfOneYear = async (req, res, next) => {
 }
 
 
-export const GetSelectedClassStudends = (req, res, next) => {
+export const GetSelectedClassStudends = async (req, res, next) => {
     const { selectedClass } = req.params;
-    console.log(selectedClass);
+    // try {
+    //     const result = await Student.findAll({where : { className : selectedClass}});
+
+    // } catch (error) {
+
+    // }
     return res.send("success");
 }

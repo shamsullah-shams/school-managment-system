@@ -69,7 +69,7 @@ const AdmitStudent = props => {
         }
     }
 
-    let Component;
+    let FirstFormData, SecondFormData;
 
     if (nextForm) {
 

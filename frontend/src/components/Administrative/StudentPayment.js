@@ -20,6 +20,7 @@ const StudentPayments = () => {
         // send Request to API //
         try {
             const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
+            console.log(result);
             setShowDbData(true);
         } catch (error) {
 
