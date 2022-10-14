@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { GrEdit } from "react-icons/gr";
+import axios from "axios";
+import Table from "../UI/Table/Table";
 
 
 
@@ -8,6 +8,7 @@ import { GrEdit } from "react-icons/gr";
 const ManageClasses = props => {
     const [dbData, setDbData] = useState([]);
     // Get Data from backend when the component loads
+    const tableHeaders = ["S/N", "Name", "Class Type", "Edit"];
     useEffect(() => {
         const getDbData = async () => {
             try {
@@ -32,48 +33,11 @@ const ManageClasses = props => {
     }, []);
     return (
         <React.Fragment>
-            {
-                <React.Fragment>
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S/N</th>
-                                <th>Name</th>
-                                <th>Class Type</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                dbData.map(SinglePayment => {
-                                    return (
-                                        <React.Fragment>
-                                            <tr>
-                                                <td colSpan="4">
-                                                    <hr />
-                                                </td>
-                                            </tr>
-                                            <tr key={SinglePayment[0]}>
-                                                {
-                                                    SinglePayment.map(property => {
-                                                        return (
-                                                            <td key={property}>{property}</td>
-                                                        )
-                                                    })
-                                                }
-                                                <td>
-                                                    <GrEdit />
-                                                </td>
-                                            </tr>
-                                        </React.Fragment>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </React.Fragment>
-            }
+            <Table
+                tableHeaders={tableHeaders}
+                tableBody={dbData}
+            />
+
         </React.Fragment>
     );
 };

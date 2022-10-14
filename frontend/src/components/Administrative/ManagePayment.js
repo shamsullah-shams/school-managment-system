@@ -4,15 +4,16 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
-import { GrEdit } from "react-icons/gr";
+import Table from "../UI/Table/Table";
 
 
 
 
 const ManagePayments = () => {
     const [getYear, setGetYear] = useState("");
-    const [paymentData, setPaymentData] = useState([]);
-    const [tableBody, setTableBody] = useState(false);
+    const [dbData, setDbData] = useState([]);
+    const [showDbData, setShowDbData] = useState(false);
+    const tableHeaders = ["S/N", "Title", "Class", "Amount", "Year", "Description", "Edit"];
 
     const onChangeHandler = event => {
         setGetYear(event.target.value);
@@ -22,10 +23,12 @@ const ManagePayments = () => {
         event.preventDefault(event);
         try {
             const yearPayments = await axios.get(`http://localhost:8080/api/admin/payments/${getYear}`);
-            setTableBody(true);
+            setShowDbData(true);
+            let counter = 0;
             const newArray = yearPayments.data.map(SO => {
+                counter++;
                 return [
-                    SO.id,
+                    counter,
                     SO.title,
                     SO.className,
                     SO.amount,
@@ -33,7 +36,7 @@ const ManagePayments = () => {
                     SO.description
                 ]
             });
-            setPaymentData(newArray);
+            setDbData(newArray);
         } catch (error) {
             console.log(error);
         }
@@ -53,48 +56,11 @@ const ManagePayments = () => {
                 </Row>
             </Form>
             {
-                tableBody ? <React.Fragment>
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>title</th>
-                                <th>Class</th>
-                                <th>amount</th>
-                                <th>Year</th>
-                                <th>description</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                tableBody ? paymentData.map(SinglePayment => {
-                                    return (
-                                        <React.Fragment>
-                                            <tr>
-                                                <td colSpan="7">
-                                                    <hr />
-                                                </td>
-                                            </tr>
-                                            <tr key={SinglePayment[0]}>
-                                                {
-                                                    SinglePayment.map(property => {
-                                                        return (
-                                                            <td key={property}>{property}</td>
-                                                        )
-                                                    })
-                                                }
-                                                <td>
-                                                    <GrEdit />
-                                                </td>
-                                            </tr>
-                                        </React.Fragment>
-                                    )
-                                }) : null
-                            }
-                        </tbody>
-                    </table>
+                showDbData ? <React.Fragment>
+                    <Table
+                        tableHeaders={tableHeaders}
+                        tableBody={dbData}
+                    />
                 </React.Fragment> : null
             }
         </React.Fragment>

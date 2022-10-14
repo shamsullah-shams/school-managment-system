@@ -4,13 +4,14 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
-import { GrEdit } from "react-icons/gr";
+import Table from "../UI/Table/Table";
 
 
 const ManageUsers = props => {
     const [selectedType, setSelectedType] = useState("");
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
+    const tableHeaders = ["S/N", "Photo", "Name", "User Name", "Email", "Edit"]
 
     const onChangeHandler = event => {
         setSelectedType(event.target.value);
@@ -57,46 +58,10 @@ const ManageUsers = props => {
             </Form>
             {
                 showDbData ? <React.Fragment>
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S/N</th>
-                                <th>Photo</th>
-                                <th>Name</th>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                showDbData ? dbData.map(SinglePayment => {
-                                    return (
-                                        <React.Fragment>
-                                            <tr>
-                                                <td colSpan="6">
-                                                    <hr />
-                                                </td>
-                                            </tr>
-                                            <tr key={SinglePayment[0]}>
-                                                {
-                                                    SinglePayment.map(property => {
-                                                        return (
-                                                            <td key={property}>{property}</td>
-                                                        )
-                                                    })
-                                                }
-                                                <td>
-                                                    <GrEdit />
-                                                </td>
-                                            </tr>
-                                        </React.Fragment>
-                                    )
-                                }) : null
-                            }
-                        </tbody>
-                    </table>
+                    <Table
+                        tableHeaders={tableHeaders}
+                        tableBody={dbData}
+                    />
                 </React.Fragment> : null
             }
         </React.Fragment>

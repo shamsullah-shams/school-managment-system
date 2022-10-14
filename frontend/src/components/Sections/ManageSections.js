@@ -4,7 +4,7 @@ import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
-import { GrEdit } from "react-icons/gr";
+import Table from "../UI/Table/Table";
 
 
 
@@ -12,6 +12,8 @@ const ManageSections = props => {
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
+    const tableHeaders = ["S/N", "Name", "Class Name", "Teacher", "Edit"];
+
 
     // @@ handling input changes
     const onChangeHandler = event => {
@@ -57,45 +59,10 @@ const ManageSections = props => {
 
             {
                 showDbData ? <React.Fragment>
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S/N</th>
-                                <th>Name</th>
-                                <th>Class Name</th>
-                                <th>Teacher No</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                showDbData ? dbData.map(SinglePayment => {
-                                    return (
-                                        <React.Fragment>
-                                            <tr>
-                                                <td colSpan="7">
-                                                    <hr />
-                                                </td>
-                                            </tr>
-                                            <tr key={SinglePayment[0]}>
-                                                {
-                                                    SinglePayment.map(property => {
-                                                        return (
-                                                            <td key={property}>{property}</td>
-                                                        )
-                                                    })
-                                                }
-                                                <td>
-                                                    <GrEdit />
-                                                </td>
-                                            </tr>
-                                        </React.Fragment>
-                                    )
-                                }) : null
-                            }
-                        </tbody>
-                    </table>
+                    <Table
+                        tableHeaders={tableHeaders}
+                        tableBody={dbData}
+                    />
                 </React.Fragment> : null
             }
         </React.Fragment>

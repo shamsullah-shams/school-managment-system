@@ -48,19 +48,26 @@ const CreateUser = props => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         const formData = new FormData();
-        formData.append("userType", user.userType);
-        formData.append("fullName", user.fullName);
-        formData.append("address", user.address);
-        formData.append("email", user.email);
-        formData.append("userName", user.userName);
-        formData.append("phone", user.phone);
-        formData.append("dateOfBirth", user.dateOfBirth);
-        formData.append("password", user.password);
-        formData.append("gender", user.gender);
-        formData.append("nationality", user.nationality);
-        formData.append("state", user.state);
-        formData.append("bloodGroup", user.bloodGroup);
-        formData.append("image", user.image);
+        // formData.append("userType", user.userType);
+        // formData.append("fullName", user.fullName);
+        // formData.append("address", user.address);
+        // formData.append("email", user.email);
+        // formData.append("userName", user.userName);
+        // formData.append("phone", user.phone);
+        // formData.append("dateOfBirth", user.dateOfBirth);
+        // formData.append("password", user.password);
+        // formData.append("gender", user.gender);
+        // formData.append("nationality", user.nationality);
+        // formData.append("state", user.state);
+        // formData.append("bloodGroup", user.bloodGroup);
+        // formData.append("image", user.image);
+
+
+        // @@ create form data
+        for (let value in user) {
+            console.log(1);
+            formData.append(value, user[value]);
+        }
 
 
         try {
