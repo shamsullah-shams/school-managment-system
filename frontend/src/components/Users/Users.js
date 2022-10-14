@@ -3,6 +3,7 @@ import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import CreateUser from "./CreateUser";
 import "../Root.css";
+import ManageUsers from "./ManageUsers";
 
 
 
@@ -34,6 +35,9 @@ const Users = props => {
                 </Row>
                 {
                     createUser ? <CreateUser /> : null
+                }
+                {
+                    manageUsers ? <ManageUsers /> : null
                 }
 
             </Card>

@@ -3,6 +3,7 @@ import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import "../Administrative.css";
 import CreateClass from "./CreateClass";
+import ManageClasses from "./ManageClasses";
 
 
 
@@ -36,7 +37,9 @@ const Classes = props => {
                 {
                     createClass ? <CreateClass /> : null
                 }
-
+                {
+                    manageClasses ? <ManageClasses /> : null
+                }
             </Card>
         </main>
     );

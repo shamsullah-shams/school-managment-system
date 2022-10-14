@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import AddSubject from "./AddSubject";
+import ManageSubjects from "./ManageSubjects";
 
 
 
@@ -32,6 +33,9 @@ const Subjects = props => {
                 </Row>
                 {
                     addSubject ? <AddSubject /> : null
+                }
+                {
+                    manageSubjects ? <ManageSubjects /> : null
                 }
             </Card>
         </main>

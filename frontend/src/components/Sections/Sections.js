@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import CreateSection from "./CreateSection";
+import ManageSections from "./ManageSections";
 
 
 
@@ -34,7 +35,9 @@ const Sections = props => {
                 {
                     createSection ? <CreateSection /> : null
                 }
-
+                {
+                    manageSections ? <ManageSections /> : null
+                }
             </Card>
         </main>
     );

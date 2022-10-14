@@ -35,8 +35,13 @@ export const RagisterStudent = async (req, res, next) => {
         dateOfBirth,
         nationality,
         state,
-        bloodGroup
+        bloodGroup,
+        parent,
+        section,
+        addmissionNo,
+        className,
     } = req.body;
+
 
     const imageUrl = req.file.path;
     const NStudent = new Student({
@@ -50,12 +55,18 @@ export const RagisterStudent = async (req, res, next) => {
         state,
         bloodGroup,
         imageUrl,
+        parent,
+        className,
+        section,
+        addmissionNo,
     })
 
     try {
         const result = await NStudent.save();
+        console.log(result);
         return res.send(result);
     } catch (error) {
+        console.log(error);
         return res.send(error)
     }
 };
@@ -164,13 +175,13 @@ export const CreateSection = async (req, res, next) => {
 
 // @@ create new Subject 
 export const CreateSubject = async (req, res, next) => {
-    const { name, shortName, teacher, subjectClass } = req.body;
+    const { name, shortName, teacher, className } = req.body;
 
     const NewSubject = new Subject({
         name,
         shortName,
         teacher,
-        subjectClass
+        className
     });
 
     try {
@@ -243,11 +254,107 @@ export const GetPaymentsOfOneYear = async (req, res, next) => {
 
 export const GetSelectedClassStudends = async (req, res, next) => {
     const { selectedClass } = req.params;
-    // try {
-    //     const result = await Student.findAll({where : { className : selectedClass}});
 
-    // } catch (error) {
+    try {
+        const result = await Student.findAll({ where: { className: selectedClass } });
+        const resultArray = result.map(singleStudent => {
+            return {
+                id: singleStudent.dataValues.id,
+                imageUrl: singleStudent.dataValues.imageUrl,
+                fullName: singleStudent.dataValues.fullName,
+                addmissionNo: singleStudent.dataValues.addmissionNo,
+                section: singleStudent.dataValues.section,
+                email: singleStudent.dataValues.email,
+            }
+        });
+        console.log(result);
+        return res.send(resultArray);
+    } catch (error) {
+        return console.log(error);
+    }
+}
 
-    // }
-    return res.send("success");
+
+
+// Promote Student from One Class TO An Other
+export const PromoteStudents = async (req, res, next) => {
+
+    const { fromClass, fromSection, toClass, toSection } = req.body;
+
+    try {
+        const result = await Student.update(
+            { className: toClass, section: toSection },
+            { where: { className: fromClass, section: fromSection } }
+        )
+        console.log(result);
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
+
+
+// @@ Get Users Who Has same type 
+export const GetSelectedTypeUsers = async (req, res, next) => {
+    const { type } = req.params;
+
+    try {
+        const result = await User.findAll({ where: { userType: type } });
+        const newArray = result.map(singleObject => singleObject.dataValues);
+        return res.send(newArray);
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
+
+// Get All Classes
+export const GetAllClasses = async (req, res, next) => {
+    try {
+        const result = await Classes.findAll();
+        const newArray = result.map(SingleObject => SingleObject.dataValues);
+        return res.send(newArray);
+    } catch (error) {
+        return res.send(error);
+    }
+
+}
+
+
+// Get All Section which are related to one Class
+export const GetAllSections = async (req, res, next) => {
+    const { selectedClass } = req.params;
+    try {
+        const result = await Section.findAll({
+            where: {
+                className: selectedClass
+            }
+        });
+        const newArray = result.map(SingleObject => SingleObject.dataValues);
+        return res.send(newArray);
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
+
+// Get All Subjects which are related to one class
+export const GetAllSubjects = async (req, res, next) => {
+    const { selectedClass } = req.params;
+
+    console.log("selectedClass", selectedClass);
+
+    try {
+        const result = await Subject.findAll({
+            where: {
+                className: selectedClass
+            }
+        });
+        const newArray = result.map(SingleObject => SingleObject.dataValues);
+        console.log("new Array", newArray);
+        return res.send(newArray);
+    } catch (error) {
+        console.log(error);
+    }
 }

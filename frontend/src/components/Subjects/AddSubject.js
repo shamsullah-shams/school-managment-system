@@ -14,7 +14,7 @@ const AddSubject = props => {
         name: "",
         shortName: "",
         teacher: "",
-        subjectClass: "",
+        className: "",
     });
 
     const onChangeHandler = event => {
@@ -34,7 +34,7 @@ const AddSubject = props => {
                 name: newSubject.name,
                 shortName: newSubject.shortName,
                 teacher: newSubject.teacher,
-                subjectClass: newSubject.subjectClass,
+                className: newSubject.className,
             });
 
             console.log(result);
@@ -67,7 +67,7 @@ const AddSubject = props => {
                 <SelectElement
                     label="Class"
                     options={["level 1", "level 2"]}
-                    name="subjectClass"
+                    name="className"
                     onChange={onChangeHandler}
                 />
             </Row>

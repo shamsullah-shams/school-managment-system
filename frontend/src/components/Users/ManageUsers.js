@@ -1,42 +1,44 @@
 import React, { useState } from "react";
-import Form from "../UI/Form/Form";
-import Row from "../UI/Row/Row";
-import { GrEdit } from "react-icons/gr";
-import Buttons from "../UI/Button/Buttons";
-import SelectElement from "../UI/Form/FormElement/SelectElement";
 import axios from "axios";
+import Form from "../UI/Form/Form";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
+import Row from "../UI/Row/Row";
+import Buttons from "../UI/Button/Buttons";
+import { GrEdit } from "react-icons/gr";
 
-const StudentPayments = () => {
-    const [selectedClass, setSelectedClass] = useState("");
+
+const ManageUsers = props => {
+    const [selectedType, setSelectedType] = useState("");
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
 
     const onChangeHandler = event => {
-        setSelectedClass(event.target.value);
+        setSelectedType(event.target.value);
     }
 
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
-        // send Request to API //
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
+            const result = await axios.get(`http://localhost:8080/api/admin/users/${selectedType}`);
             let counter = 0;
-            const newArray = result.data.map(singleStudent => {
+            const newArray = result.data.map(SingleObject => {
                 counter++;
                 return [
                     counter,
-                    singleStudent.imageUrl,
-                    singleStudent.fullName,
-                    singleStudent.addmissionNo,
+                    SingleObject.imageUrl,
+                    SingleObject.fullName,
+                    SingleObject.userName,
+                    SingleObject.email,
                 ]
             });
-
             setDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-
+            console.log(error);
         }
     }
+
+
 
 
     return (
@@ -44,8 +46,8 @@ const StudentPayments = () => {
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <SelectElement
-                        label="Class"
-                        options={["level 1", "level 2"]}
+                        label="User Type"
+                        options={["Teacher", "Accountant", "Parent"]}
                         onChange={onChangeHandler}
                     />
                 </Row>
@@ -59,11 +61,12 @@ const StudentPayments = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th>S/N</th>
                                 <th>Photo</th>
                                 <th>Name</th>
-                                <th>Admision No</th>
-                                <th>Manage Payments</th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,7 +75,7 @@ const StudentPayments = () => {
                                     return (
                                         <React.Fragment>
                                             <tr>
-                                                <td colSpan="7">
+                                                <td colSpan="6">
                                                     <hr />
                                                 </td>
                                             </tr>
@@ -98,8 +101,7 @@ const StudentPayments = () => {
             }
         </React.Fragment>
     );
-};
+}
 
 
-
-export default StudentPayments;
+export default ManageUsers;

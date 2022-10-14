@@ -23,6 +23,10 @@ const AdmitStudent = props => {
         state: "",
         bloodGroup: "",
         image: "",
+        className: "",
+        section: "",
+        parent: "",
+        addmissionNo: ""
     });
 
     const onChangeHandler = event => {
@@ -48,18 +52,10 @@ const AdmitStudent = props => {
         event.preventDefault(event);
 
         const formData = new FormData();
-        formData.append("fullName", student.fullName);
-        formData.append("address", student.address);
-        formData.append("email", student.email);
-        formData.append("gender", student.gender);
-        formData.append("phone", student.phone);
-        formData.append("dateOfBirth", student.dateOfBirth);
-        formData.append("nationality", student.nationality);
-        formData.append("state", student.state);
-        formData.append("bloodGroup", student.bloodGroup);
-        formData.append("image", student.image);
-
-
+        // @@ create form data
+        for (let value in student) {
+            formData.append(value, student[value]);
+        }
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/student/ragister", formData);
@@ -69,12 +65,51 @@ const AdmitStudent = props => {
         }
     }
 
-    let FirstFormData, SecondFormData;
+
+
+    const nextFormHandler = event => {
+        event.preventDefault(event);
+        setNextForm(true);
+    }
+
+    let Component;
 
     if (nextForm) {
-
+        Component = <React.Fragment>
+            <Row>
+                <SelectElement
+                    label="Class"
+                    options={["level 1", "level 2"]}
+                    name="className"
+                    onChange={onChangeHandler}
+                />
+                <SelectElement
+                    label="Section"
+                    options={["A", "B", "C", "D"]}
+                    name="section"
+                    onChange={onChangeHandler}
+                />
+                <SelectElement
+                    label="Parent"
+                    options={["Shamsi", "Khan", "Jan"]}
+                    name="parent"
+                    onChange={onChangeHandler}
+                />
+                <InputElement
+                    label="Admition No"
+                    placeholder="Admission"
+                    name="addmissionNo"
+                    value={student.addmissionNo}
+                    onChange={onChangeHandler}
+                />
+            </Row>
+            <Row>
+                <Buttons title="Submit" onClick={onSubmitHandler} />
+            </Row>
+        </React.Fragment>
     } else {
-        Component = Component = <Form onSubmit={onSubmitHandler}>
+        Component = <React.Fragment>
+
             <Row>
                 <InputElement
                     label="Full Name"
@@ -151,18 +186,21 @@ const AdmitStudent = props => {
                 />
             </Row>
             <Row>
-                <Buttons title="Next" />
+                <Buttons title="Next" onClick={nextFormHandler} />
             </Row>
-        </Form>
+        </React.Fragment>
     }
 
 
 
     return (
         <React.Fragment>
-            {
-                Component
-            }
+            <Form onSubmit={onSubmitHandler}>
+                {
+                    Component
+                }
+            </Form>
+
         </React.Fragment>
     );
 };

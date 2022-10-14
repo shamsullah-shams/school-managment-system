@@ -70,10 +70,7 @@ const CreateSection = props => {
                 />
             </Row>
             <Row>
-                <Buttons
-                    previos={{ title: "Previos" }}
-                    next={{ title: "Next" }}
-                />
+                <Buttons title="Submit" />
             </Row>
         </Form>
     );

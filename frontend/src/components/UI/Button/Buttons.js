@@ -4,7 +4,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const Buttons = props => {
     return (
-        <div className="Buttons">
+        <div className="Buttons" {...props}>
             <button>{props.title}</button>
         </div>
     );

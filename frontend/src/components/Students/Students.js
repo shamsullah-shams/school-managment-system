@@ -4,6 +4,7 @@ import Row from "../UI/Row/Row";
 import "../Root.css";
 import AdmitStudent from "./AdmitStudent";
 import StudentPromotion from "./StudentPromotion";
+import StudentInfo from "./StudentInfo";
 
 
 
@@ -60,6 +61,9 @@ const Students = props => {
                 }
                 {
                     studentPromotion ? <StudentPromotion /> : null
+                }
+                {
+                    studentInfo ? <StudentInfo /> : null
                 }
             </Card>
         </main>

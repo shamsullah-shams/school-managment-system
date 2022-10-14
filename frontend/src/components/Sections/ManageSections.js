@@ -1,69 +1,71 @@
+import axios from "axios";
 import React, { useState } from "react";
+import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
+import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import { GrEdit } from "react-icons/gr";
-import Buttons from "../UI/Button/Buttons";
-import SelectElement from "../UI/Form/FormElement/SelectElement";
-import axios from "axios";
 
-const StudentPayments = () => {
-    const [selectedClass, setSelectedClass] = useState("");
+
+
+const ManageSections = props => {
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
+    const [selectedClass, setSelectedClass] = useState("");
 
+    // @@ handling input changes
     const onChangeHandler = event => {
         setSelectedClass(event.target.value);
     }
 
+    // @@ handling form submission
     const onSubmitHandler = async (event) => {
-        event.preventDefault(event);
-        // send Request to API //
+        event.preventDefault();
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
+            const result = await axios.get(`http://localhost:8080/api/admin/sections/${selectedClass}`);
             let counter = 0;
-            const newArray = result.data.map(singleStudent => {
+            const newArray = result.data.map(SingleObject => {
                 counter++;
                 return [
                     counter,
-                    singleStudent.imageUrl,
-                    singleStudent.fullName,
-                    singleStudent.addmissionNo,
+                    SingleObject.name,
+                    SingleObject.className,
+                    SingleObject.teacher,
                 ]
             });
-
             setDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-
+            console.log(error);
         }
     }
-
 
     return (
         <React.Fragment>
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <SelectElement
+                        onChange={onChangeHandler}
                         label="Class"
                         options={["level 1", "level 2"]}
-                        onChange={onChangeHandler}
                     />
                 </Row>
                 <Row>
                     <Buttons title="Submit" />
                 </Row>
             </Form>
+
             {
                 showDbData ? <React.Fragment>
                     <hr />
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Photo</th>
+                                <th>S/N</th>
                                 <th>Name</th>
-                                <th>Admision No</th>
-                                <th>Manage Payments</th>
+                                <th>Class Name</th>
+                                <th>Teacher No</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,4 +104,4 @@ const StudentPayments = () => {
 
 
 
-export default StudentPayments;
+export default ManageSections;

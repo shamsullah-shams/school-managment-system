@@ -50,6 +50,22 @@ const Student = sequelize.define("Student", {
     imageUrl: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    parent: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    className: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    section: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    addmissionNo: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 });
 
