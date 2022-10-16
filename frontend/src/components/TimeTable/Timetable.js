@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import "./Timetable.css";
@@ -25,7 +25,6 @@ const Timetable = props => {
 
     return (
         <main className="Main">
-            <Card>Manage TimeTables</Card>
             <Card card title="Manage Timetables">
                 <Row>
                     <div className="Buutons__Group">

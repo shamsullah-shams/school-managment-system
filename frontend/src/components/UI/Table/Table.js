@@ -12,7 +12,7 @@ const Table = props => {
                 <div className="DisplayFlex">
                     <label>filter: </label>
                     <form className="DisplayFlex IconAndInput">
-                        <input type="text" placeholder="Filter TIme Table" />
+                        <input type="text" placeholder="Filter TIme Table" name="filter" onChange={props.filter} />
                         <FiSearch />
                     </form>
                 </div>
@@ -54,9 +54,17 @@ const Table = props => {
                                         <tr key={singleTimeTable[0]}>
                                             {
                                                 singleTimeTable.map(property => {
-                                                    return (
-                                                        <td key={property}>{property}</td>
-                                                    )
+                                                    if (property.toString().includes("backend")) {
+                                                        return (
+                                                            <td>
+                                                                <img alt="Photo " src={`http://localhost:8080/images/${property}`} />
+                                                            </td>
+                                                        );
+                                                    } else {
+                                                        return (
+                                                            <td key={property}>{property}</td>
+                                                        )
+                                                    }
                                                 })
                                             }
                                             <td>

@@ -4,6 +4,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import adminRoutes from "./routes/admin.js";
 import morgan from "morgan";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const app = Express();
 app.use(bodyParser.json());
@@ -12,7 +15,11 @@ app.use(cors());
 app.use(morgan());
 
 
+// Directory name
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// @@ static routes
+app.use('/backend/images', Express.static(path.join(__dirname, 'images')));
 
 app.use("/api/admin", adminRoutes);
 

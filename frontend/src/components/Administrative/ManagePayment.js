@@ -42,6 +42,10 @@ const ManagePayments = () => {
         }
     }
 
+    const onFilterHandler = async (event) => {
+        console.log(event.target.value);
+    }
+
     let year = new Date().toISOString().split("-")[0];
     const yearArray = [year, --year, --year, --year, --year, --year];
 
@@ -60,6 +64,7 @@ const ManagePayments = () => {
                     <Table
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
+                        filter={onFilterHandler}
                     />
                 </React.Fragment> : null
             }

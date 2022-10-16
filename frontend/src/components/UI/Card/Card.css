@@ -32,3 +32,11 @@ hr {
     align-items: center;
     width: 50px;
 }
+
+.Toggle__Remove>div {
+    cursor: pointer;
+}
+
+.Toggle__Remove>div:hover {
+    color: red;
+}
