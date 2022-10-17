@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Context from "./Cotext";

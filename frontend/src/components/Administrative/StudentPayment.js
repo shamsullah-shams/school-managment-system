@@ -5,12 +5,16 @@ import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import axios from "axios";
 import Table from "../UI/Table/Table";
+import { useSelector } from "react-redux";
 
 const StudentPayments = () => {
     const [selectedClass, setSelectedClass] = useState("");
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "Admission No", "Manage Payments"];
+
+    // @@ Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     const onChangeHandler = event => {
         setSelectedClass(event.target.value);
@@ -46,7 +50,7 @@ const StudentPayments = () => {
                 <Row>
                     <SelectElement
                         label="Class"
-                        options={["level 1", "level 2"]}
+                        options={classes}
                         onChange={onChangeHandler}
                     />
                 </Row>

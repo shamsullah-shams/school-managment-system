@@ -5,12 +5,19 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import Buttons from "../UI/Button/Buttons";
+import { useSelector } from "react-redux";
 
 
 
 const AdmitStudent = props => {
 
     const [nextForm, setNextForm] = useState(false);
+    // @@ Fetch Classes, Parents, Sections from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
+    const parents = useSelector(state => state.loadTeachers.Parents);
+    const sections = useSelector(state => state.loadTeachers.Sections);
+
+
 
     const [student, setStudent] = useState({
         fullName: "",
@@ -59,7 +66,7 @@ const AdmitStudent = props => {
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/student/ragister", formData);
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -79,19 +86,19 @@ const AdmitStudent = props => {
             <Row>
                 <SelectElement
                     label="Class"
-                    options={["level 1", "level 2"]}
+                    options={classes}
                     name="className"
                     onChange={onChangeHandler}
                 />
                 <SelectElement
                     label="Section"
-                    options={["A", "B", "C", "D"]}
+                    options={sections}
                     name="section"
                     onChange={onChangeHandler}
                 />
                 <SelectElement
                     label="Parent"
-                    options={["Shamsi", "Khan", "Jan"]}
+                    options={parents}
                     name="parent"
                     onChange={onChangeHandler}
                 />

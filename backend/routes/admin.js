@@ -9,6 +9,7 @@ import {
     GetAllClasses,
     GetAllSections,
     GetAllSubjects,
+    GetAllTeachers,
     GetAllTimeTables,
     GetPaymentsOfOneYear,
     GetSelectedClassStudends,
@@ -34,6 +35,8 @@ adminRoutes.get("/classes/getAll", GetAllClasses);
 adminRoutes.get("/sections/:selectedClass", GetAllSections);
 // @@ Get All Subjects which are related to one Class
 adminRoutes.get("/subjects/:selectedClass", GetAllSubjects);
+// @@ get all teacher names 
+adminRoutes.get("/teachers/getAll", GetAllTeachers);
 
 
 // @@ Post Requests 

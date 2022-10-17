@@ -7,7 +7,7 @@ import ManageTimeTables from "./ManageTimeTables";
 
 
 
-const Timetable = props => {
+const Timetable = () => {
 
     const [createTimeTable, setCreateTimeTable] = useState(true);
     const [manageTimeTables, setManageTimeTables] = useState(false);

@@ -5,11 +5,14 @@ import Row from "../UI/Row/Row";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
+import { useDispatch } from "react-redux";
+import { loadTeacher } from "../../Redux/actions/Teacher";
 
 
 
 
 const CreateUser = props => {
+    const dispatch = useDispatch();
     const [user, setUser] = useState({
         userType: "",
         fullName: "",
@@ -48,31 +51,16 @@ const CreateUser = props => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         const formData = new FormData();
-        // formData.append("userType", user.userType);
-        // formData.append("fullName", user.fullName);
-        // formData.append("address", user.address);
-        // formData.append("email", user.email);
-        // formData.append("userName", user.userName);
-        // formData.append("phone", user.phone);
-        // formData.append("dateOfBirth", user.dateOfBirth);
-        // formData.append("password", user.password);
-        // formData.append("gender", user.gender);
-        // formData.append("nationality", user.nationality);
-        // formData.append("state", user.state);
-        // formData.append("bloodGroup", user.bloodGroup);
-        // formData.append("image", user.image);
 
-
-        // @@ create form data
         for (let value in user) {
-            console.log(1);
+            // console.log(1);
             formData.append(value, user[value]);
         }
 
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/users/ragister", formData);
-            console.log(result);
+            dispatch(loadTeacher());
         } catch (error) {
             console.log(error);
         }

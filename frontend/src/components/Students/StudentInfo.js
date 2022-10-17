@@ -5,6 +5,8 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import { GrEdit } from "react-icons/gr";
+import { useSelector } from "react-redux";
+import Table from "../UI/Table/Table";
 
 
 
@@ -13,6 +15,11 @@ const StudentInfo = props => {
     const [selectedClass, setSelectedClass] = useState("");
     const [dbData, setDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
+    const tableHeaders = ["S/N", "Photo", "Name", "Addmission No", "Section", "Email", "Edit"];
+
+
+    // Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     // onChange Function
     const onChangeHandler = event => {
@@ -50,54 +57,17 @@ const StudentInfo = props => {
         <React.Fragment>
             <Form onSubmit={onSubmitHandler} className="Left">
                 <Row>
-                    <SelectElement label="Class" options={["level 1", "level 2"]} onChange={onChangeHandler} />
+                    <SelectElement label="Class" options={classes} onChange={onChangeHandler} />
                 </Row>
                 <Buttons title="Submit" />
             </Form>
 
             {
                 showDbData ? <React.Fragment>
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>Photo</th>
-                                <th>Name</th>
-                                <th>Admision No</th>
-                                <th>Section</th>
-                                <th>Email</th>
-                                <th>Manage Studnets</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                showDbData ? dbData.map(SinglePayment => {
-                                    return (
-                                        <React.Fragment>
-                                            <tr>
-                                                <td colSpan="7">
-                                                    <hr />
-                                                </td>
-                                            </tr>
-                                            <tr key={SinglePayment[0]}>
-                                                {
-                                                    SinglePayment.map(property => {
-                                                        return (
-                                                            <td key={property}>{property}</td>
-                                                        )
-                                                    })
-                                                }
-                                                <td>
-                                                    <GrEdit />
-                                                </td>
-                                            </tr>
-                                        </React.Fragment>
-                                    )
-                                }) : null
-                            }
-                        </tbody>
-                    </table>
+                    <Table
+                        tableHeaders={tableHeaders}
+                        tableBody={dbData}
+                    />
                 </React.Fragment> : null
             }
 

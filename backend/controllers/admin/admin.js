@@ -358,3 +358,46 @@ export const GetAllSubjects = async (req, res, next) => {
         console.log(error);
     }
 }
+
+
+// Get All Teachers Name 
+export const GetAllTeachers = async (req, res, next) => {
+    console.log("req")
+    try {
+        let result = await User.findAll(
+            {
+                where: {
+                    userType: "Teacher"
+                }
+            }
+        );
+        // Array of All Teachers
+        const teachers = result.map(singleObject => singleObject.dataValues.fullName);
+        result = await User.findAll(
+            {
+                where: {
+                    userType: "Parent"
+                }
+            }
+        );
+        // Array of All Parents 
+        const parents = result.map(singleObject => singleObject.dataValues.fullName);
+        result = await Classes.findAll();
+        // Array of All Classes
+        const classes = result.map(singleObject => singleObject.dataValues.className);
+
+        result = await Section.findAll();
+        // Array of Sections 
+        const sections = result.map(singleObject => singleObject.dataValues.name);
+
+
+        return res.json({
+            teachers: teachers,
+            parents: parents,
+            classes: classes,
+            sections: sections,
+        })
+    } catch (error) {
+        return res.send(error);
+    }
+}

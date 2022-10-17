@@ -4,7 +4,7 @@ import Row from "../UI/Row/Row";
 import axios from "axios";
 import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
-
+import { useSelector } from "react-redux";
 
 
 
@@ -15,6 +15,11 @@ const StudentPromotion = props => {
         toClass: "",
         toSection: "",
     });
+
+    // Fetch Classes and Sections from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
+    const sections = useSelector(state => state.loadTeachers.Sections);
+
 
     // input change handler
     const onChangeHandler = event => {
@@ -32,7 +37,7 @@ const StudentPromotion = props => {
         event.preventDefault(event);
         try {
             const result = await axios.post("http://localhost:8080/api/admin/students/promote", data);
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -47,25 +52,25 @@ const StudentPromotion = props => {
                         onChange={onChangeHandler}
                         label="From Class"
                         name="fromClass"
-                        options={['level 1', "level 2"]}
+                        options={classes}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="From Section"
                         name="fromSection"
-                        options={["A", "B", "C"]}
+                        options={sections}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="To Class"
                         name="toClass"
-                        options={["leve 1", "level 2"]}
+                        options={classes}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="To Section"
                         name="toSection"
-                        options={["A", "B", "C"]}
+                        options={sections}
                     />
                 </Row>
                 <Row>

@@ -5,16 +5,20 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
 import Row from "../UI/Row/Row";
+import { useSelector } from "react-redux";
 
 
 
-
-const CreateSection = props => {
+const CreateSection = () => {
     const [section, setSection] = useState({
         name: "",
         className: "",
         teacher: "",
     });
+
+    // @@ Fetch Teachers and classes from Redux
+    const teachers = useSelector(state => state.loadTeachers.Teachers);
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     const onChangeHandler = event => {
         const { name, value } = event.target;
@@ -35,7 +39,7 @@ const CreateSection = props => {
                 teacher: section.teacher,
             });
 
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -56,7 +60,7 @@ const CreateSection = props => {
             <Row>
                 <SelectElement
                     label="Select Class"
-                    options={["level 1", "level 2", "level 3"]}
+                    options={classes}
                     name="className"
                     onChange={onChangeHandler}
                 />
@@ -64,7 +68,7 @@ const CreateSection = props => {
             <Row>
                 <SelectElement
                     label="Teacher"
-                    options={["shami", "faizi"]}
+                    options={teachers}
                     name="teacher"
                     onChange={onChangeHandler}
                 />

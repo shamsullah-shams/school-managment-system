@@ -5,6 +5,7 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Table from "../UI/Table/Table";
+import { useSelector } from "react-redux";
 
 
 
@@ -14,6 +15,8 @@ const ManageSections = props => {
     const [selectedClass, setSelectedClass] = useState("");
     const tableHeaders = ["S/N", "Name", "Class Name", "Teacher", "Edit"];
 
+    // @@ fetch classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     // @@ handling input changes
     const onChangeHandler = event => {
@@ -49,7 +52,7 @@ const ManageSections = props => {
                     <SelectElement
                         onChange={onChangeHandler}
                         label="Class"
-                        options={["level 1", "level 2"]}
+                        options={classes}
                     />
                 </Row>
                 <Row>

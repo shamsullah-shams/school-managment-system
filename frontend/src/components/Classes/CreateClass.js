@@ -5,7 +5,8 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
-
+import { useDispatch } from "react-redux";
+import { loadTeacher } from "../../Redux/actions/Teacher";
 
 
 const CreateClass = props => {
@@ -14,6 +15,8 @@ const CreateClass = props => {
         name: "",
         type: "",
     });
+
+    const dispatch = useDispatch();
 
     const onChangeHandler = event => {
         const { name, value } = event.target;
@@ -31,7 +34,8 @@ const CreateClass = props => {
             const result = await axios.post("http://localhost:8080/api/admin/classes/create", {
                 newClass: newClass,
             })
-            console.log(result);
+            dispatch(loadTeacher())
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }

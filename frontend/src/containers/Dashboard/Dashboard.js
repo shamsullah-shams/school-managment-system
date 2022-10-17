@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Aside from "../../components/UI/aside/Aside";
 import Header from "../../components/UI/header/Header";
 import Root from "../../components/Root/Root"
@@ -13,11 +13,22 @@ import Subjects from "../../components/Subjects/Subjects";
 import { useLocation } from "react-router-dom";
 import "./Dashboard.css";
 import Administrative from "../../components/Administrative/Administrative";
+import { useDispatch } from "react-redux";
+import { loadTeacher } from "../../Redux/actions/Teacher";
 
 
-const Dashboard = props => {
+const Dashboard = () => {
 
+    const dispatch = useDispatch();
     const location = useLocation();
+
+
+    useEffect(() => {
+        dispatch(loadTeacher());
+        console.log("Render");
+    }, [dispatch]);
+
+
     let pathName = location.pathname;
     let Component;
 

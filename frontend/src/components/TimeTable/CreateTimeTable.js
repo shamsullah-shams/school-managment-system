@@ -5,6 +5,7 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 
 
@@ -17,6 +18,8 @@ const CreateTimeTable = props => {
         type: "",
     });
 
+    // @@ Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     const onChangeHandler = event => {
         const { name, value } = event.target;
@@ -59,7 +62,7 @@ const CreateTimeTable = props => {
             <Row>
                 <SelectElement
                     label="Class"
-                    options={["Nursery", "Level 1", "Level 2"]}
+                    options={classes}
                     name="className"
                     onChange={onChangeHandler}
                 />

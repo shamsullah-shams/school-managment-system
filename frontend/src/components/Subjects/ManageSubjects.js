@@ -5,7 +5,7 @@ import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Table from "../UI/Table/Table";
-
+import { useSelector } from "react-redux";
 
 
 const ManageSubjects = () => {
@@ -14,6 +14,10 @@ const ManageSubjects = () => {
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
     const tableHeaders = ["S/N", "Name", "Short Name", "Class", "Teacher", "Edit"];
+
+    // Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.classes);
+
 
     // @@ handling input changes
     const onChangeHandler = event => {
@@ -50,7 +54,7 @@ const ManageSubjects = () => {
                     <SelectElement
                         onChange={onChangeHandler}
                         label="Class"
-                        options={["level 1", "level 2"]}
+                        options={classes}
                     />
                 </Row>
                 <Row>

@@ -5,7 +5,7 @@ import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import Row from "../UI/Row/Row";
-
+import { useSelector } from "react-redux";
 
 
 const CreatePayments = () => {
@@ -38,7 +38,8 @@ const CreatePayments = () => {
             console.log(error);
         }
     }
-
+    // @@ Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
 
     return (
         <Form className="Left" onSubmit={onSubmitHandler}>
@@ -54,7 +55,7 @@ const CreatePayments = () => {
             <Row>
                 <SelectElement
                     label="Class"
-                    options={["all classes", "level 1", "level 2"]}
+                    options={classes}
                     name="class"
                     onChange={onChangeHandler}
                 />

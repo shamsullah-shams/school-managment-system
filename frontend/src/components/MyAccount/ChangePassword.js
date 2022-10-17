@@ -7,14 +7,13 @@ import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 
 
-const ChangePassword = props => {
+const ChangePassword = () => {
     const [newPassword, setNewPassword] = useState({
         currentPassword: "",
         replacePassword: "",
         confirmPassword: "",
     });
 
-    console.log(props)
 
     const onChangeHandler = event => {
         const { name, value } = event.target;
@@ -28,7 +27,7 @@ const ChangePassword = props => {
 
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
-        console.log(newPassword);
+        // console.log(newPassword);
     }
 
     return (

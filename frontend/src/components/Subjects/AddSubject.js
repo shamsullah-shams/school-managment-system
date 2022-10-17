@@ -5,11 +5,18 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
+import { useSelector } from "react-redux"
 
 
 
+const AddSubject = () => {
 
-const AddSubject = props => {
+
+    // @@ Fetch Teachers and Classes from Redux;
+    const teachers = useSelector(state => state.loadTeachers.Teachers);
+    const classes = useSelector(state => state.loadTeachers.Classes);
+
+
     const [newSubject, setNewSubject] = useState({
         name: "",
         shortName: "",
@@ -37,7 +44,7 @@ const AddSubject = props => {
                 className: newSubject.className,
             });
 
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -66,7 +73,7 @@ const AddSubject = props => {
             <Row>
                 <SelectElement
                     label="Class"
-                    options={["level 1", "level 2"]}
+                    options={classes}
                     name="className"
                     onChange={onChangeHandler}
                 />
@@ -74,7 +81,7 @@ const AddSubject = props => {
             <Row>
                 <SelectElement
                     label="Teacher"
-                    options={["shami", "faizi"]}
+                    options={teachers}
                     name="teacher"
                     onChange={onChangeHandler}
                 />
