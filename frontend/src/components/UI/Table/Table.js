@@ -62,8 +62,12 @@ const Table = props => {
                                                 singleTimeTable.map(property => {
                                                     if (property.toString().includes("backend")) {
                                                         return (
-                                                            <td>
-                                                                <img alt="Photo " src={`http://localhost:8080/${property}`} />
+                                                            <td className="Table__Image">
+                                                                <img
+
+                                                                    alt="Photo"
+                                                                    src={`http://localhost:8080/${property}`}
+                                                                />
                                                             </td>
                                                         );
                                                     } else {

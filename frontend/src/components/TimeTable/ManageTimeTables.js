@@ -27,7 +27,7 @@ const ManageTimeTables = props => {
 
     // Filter Outputs
     const onFilterHandler = async (event) => {
-        if (timeTable.length === 0) {
+        if (oldDbData.length === 0) {
             return;
         }
         const newArray = oldDbData.filter(SingleObject => {

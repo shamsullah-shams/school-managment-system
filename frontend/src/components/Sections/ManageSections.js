@@ -49,6 +49,9 @@ const ManageSections = props => {
 
     // Filter Outputs
     const onFilterHandler = async (event) => {
+        if (oldDbData.length === 0) {
+            return;
+        }
         const newArray = oldDbData.filter(SingleObject => {
             return SingleObject[1].includes(event.target.value);
         });

@@ -48,7 +48,7 @@ const ManageUsers = () => {
 
     // Filter Outputs
     const onFilterHandler = async (event) => {
-        if (dbData.length === 0) {
+        if (oldDbData.length === 0) {
             return;
         }
         const newArray = oldDbData.filter(SingleObject => {
