@@ -12,15 +12,12 @@ const Section = sequelize.define("Section", {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     className: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     teacher: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
 });
 

@@ -11,23 +11,18 @@ const Payment = sequelize.define("Payment", {
     },
     title: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     className: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     amount: {
         type: DataTypes.DOUBLE,
-        allowNull: false,
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     year: {
         type: DataTypes.STRING,
-        allowNull: false,
     }
 });
 

@@ -11,12 +11,9 @@ const Classes = sequelize.define("Class", {
     },
     className: {
         type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: false,
     },
     classType: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
 });
 

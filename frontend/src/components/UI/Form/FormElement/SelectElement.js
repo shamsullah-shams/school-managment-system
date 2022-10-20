@@ -14,6 +14,7 @@ const SelectElement = props => {
                     ))
                 }
             </select>
+            <small>some</small>
         </div>
     );
 };

@@ -1,0 +1,22 @@
+.Group__Div {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    height: 10px;
+}
+
+.Circle {
+    width: 20px;
+    height: 25px;
+    padding: 1px 5px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.Active_Circle {
+    border: 1px solid blue;
+    color: white;
+    background-color: blue;
+}

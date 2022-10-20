@@ -2,6 +2,7 @@ import React from "react";
 import { GrEdit } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
 import "./Table.css";
+import Row from "../Row/Row";
 
 
 
@@ -12,7 +13,12 @@ const Table = props => {
                 <div className="DisplayFlex">
                     <label>filter: </label>
                     <form className="DisplayFlex IconAndInput">
-                        <input type="text" placeholder="Filter TIme Table" name="filter" onChange={props.filter} />
+                        <input
+                            type="text"
+                            placeholder="Filter TIme Table"
+                            name="filter"
+                            onChange={props.filter}
+                        />
                         <FiSearch />
                     </form>
                 </div>
@@ -57,7 +63,7 @@ const Table = props => {
                                                     if (property.toString().includes("backend")) {
                                                         return (
                                                             <td>
-                                                                <img alt="Photo " src={`http://localhost:8080/images/${property}`} />
+                                                                <img alt="Photo " src={`http://localhost:8080/${property}`} />
                                                             </td>
                                                         );
                                                     } else {

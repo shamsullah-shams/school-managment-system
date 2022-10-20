@@ -5,7 +5,8 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
 import Row from "../UI/Row/Row";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadTeacher } from "../../Redux/actions/Teacher";
 
 
 
@@ -15,6 +16,8 @@ const CreateSection = () => {
         className: "",
         teacher: "",
     });
+
+    const dispatch = useDispatch();
 
     // @@ Fetch Teachers and classes from Redux
     const teachers = useSelector(state => state.loadTeachers.Teachers);
@@ -39,7 +42,7 @@ const CreateSection = () => {
                 teacher: section.teacher,
             });
 
-            // console.log(result);
+            dispatch(loadTeacher());
         } catch (error) {
             console.log(error);
         }

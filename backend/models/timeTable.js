@@ -10,19 +10,15 @@ const TimeTable = sequelize.define("TimeTable", {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     className: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     type: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     year: {
         type: DataTypes.STRING,
-        allowNull: false,
     }
 });
 

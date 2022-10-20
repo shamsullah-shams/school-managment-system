@@ -14,6 +14,7 @@ import Table from "../UI/Table/Table";
 const StudentInfo = props => {
     const [selectedClass, setSelectedClass] = useState("");
     const [dbData, setDbData] = useState([]);
+    const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "Addmission No", "Section", "Email", "Edit"];
 
@@ -46,10 +47,22 @@ const StudentInfo = props => {
             });
 
             setDbData(newArray);
+            setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
 
         }
+    }
+
+    // Filter Outputs
+    const onFilterHandler = async (event) => {
+        if (dbData.length === 0) {
+            return;
+        }
+        const newArray = oldDbData.filter(SingleObject => {
+            return SingleObject[2].includes(event.target.value);
+        });
+        setDbData(newArray);
     }
 
 
@@ -67,6 +80,7 @@ const StudentInfo = props => {
                     <Table
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
+                        filter={onFilterHandler}
                     />
                 </React.Fragment> : null
             }

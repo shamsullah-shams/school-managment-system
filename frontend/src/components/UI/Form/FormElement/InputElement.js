@@ -7,6 +7,7 @@ const InputElement = props => {
         <div className="Form__Element">
             <div>{props.label}: <span>*</span></div>
             <input {...props} />
+            <small>sol</small>
         </div>
     );
 };

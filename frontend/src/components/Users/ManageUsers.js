@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
@@ -7,11 +7,16 @@ import Buttons from "../UI/Button/Buttons";
 import Table from "../UI/Table/Table";
 
 
-const ManageUsers = props => {
+const ManageUsers = () => {
     const [selectedType, setSelectedType] = useState("");
     const [dbData, setDbData] = useState([]);
+    const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "User Name", "Email", "Edit"]
+
+    useEffect(() => {
+
+    }, [dbData]);
 
     const onChangeHandler = event => {
         setSelectedType(event.target.value);
@@ -33,6 +38,7 @@ const ManageUsers = props => {
                 ]
             });
             setDbData(newArray);
+            setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
             console.log(error);
@@ -40,6 +46,16 @@ const ManageUsers = props => {
     }
 
 
+    // Filter Outputs
+    const onFilterHandler = async (event) => {
+        if (dbData.length === 0) {
+            return;
+        }
+        const newArray = oldDbData.filter(SingleObject => {
+            return SingleObject[2].includes(event.target.value);
+        });
+        setDbData(newArray);
+    }
 
 
     return (
@@ -61,6 +77,7 @@ const ManageUsers = props => {
                     <Table
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
+                        filter={onFilterHandler}
                     />
                 </React.Fragment> : null
             }

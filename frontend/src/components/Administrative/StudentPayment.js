@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const StudentPayments = () => {
     const [selectedClass, setSelectedClass] = useState("");
     const [dbData, setDbData] = useState([]);
+    const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "Admission No", "Manage Payments"];
 
@@ -37,12 +38,23 @@ const StudentPayments = () => {
             });
 
             setDbData(newArray);
+            setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
 
         }
     }
 
+    // Filter Outputs
+    const onFilterHandler = async (event) => {
+        if (dbData.length === 0) {
+            return;
+        }
+        const newArray = oldDbData.filter(SingleObject => {
+            return SingleObject[2].includes(event.target.value);
+        });
+        setDbData(newArray);
+    }
 
     return (
         <React.Fragment>
@@ -63,7 +75,7 @@ const StudentPayments = () => {
                     <Table
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
-
+                        filter={onFilterHandler}
                     />
                 </React.Fragment> : null
             }

@@ -95,14 +95,14 @@ export const CreateTimeTable = (req, res, next) => {
 export const CreatePayment = async (req, res, next) => {
     const { payment } = req.body;
 
-    // const year = new Date().toISOString().split("-")[0];
+    const year = new Date().toISOString().split("-")[0];
 
     const newPayment = new Payment({
         title: payment.title,
         className: payment.class,
         amount: payment.amount,
         description: payment.description,
-        year: "2023"
+        year: year
     });
 
     try {

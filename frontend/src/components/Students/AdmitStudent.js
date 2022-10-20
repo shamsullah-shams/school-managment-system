@@ -6,12 +6,13 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import Buttons from "../UI/Button/Buttons";
 import { useSelector } from "react-redux";
+import "./AdmitStudent.css";
 
 
 
 const AdmitStudent = props => {
 
-    const [nextForm, setNextForm] = useState(false);
+    const [isFirstPart, setIsFirstPart] = useState(true);
     // @@ Fetch Classes, Parents, Sections from Redux
     const classes = useSelector(state => state.loadTeachers.Classes);
     const parents = useSelector(state => state.loadTeachers.Parents);
@@ -74,15 +75,20 @@ const AdmitStudent = props => {
 
 
 
-    const nextFormHandler = event => {
-        event.preventDefault(event);
-        setNextForm(true);
+
+    // Change Form to First 
+    const onFormChangeHandlerToFirstPart = event => {
+        setIsFirstPart(true);
     }
 
-    let Component;
+    // Change Form to First 
+    const onFormChangeHandlerToSecondPart = event => {
+        setIsFirstPart(false);
+    }
 
-    if (nextForm) {
-        Component = <React.Fragment>
+
+    const SecondPart = () => (
+        <React.Fragment>
             <Row>
                 <SelectElement
                     label="Class"
@@ -114,8 +120,10 @@ const AdmitStudent = props => {
                 <Buttons title="Submit" onClick={onSubmitHandler} />
             </Row>
         </React.Fragment>
-    } else {
-        Component = <React.Fragment>
+    );
+
+    const FirstPart = () => (
+        <React.Fragment>
 
             <Row>
                 <InputElement
@@ -193,18 +201,38 @@ const AdmitStudent = props => {
                 />
             </Row>
             <Row>
-                <Buttons title="Next" onClick={nextFormHandler} />
+                <Buttons title="Next" onClick={onFormChangeHandlerToSecondPart} />
             </Row>
         </React.Fragment>
-    }
+    );
+
+
 
 
 
     return (
         <React.Fragment>
+            <div className="Group__Div">
+                <div
+                    className="Circle Active_Circle"
+                    onClick={onFormChangeHandlerToFirstPart}
+                >
+                    1
+                </div>
+                <svg width="500" height="500"  >
+                    <line x1="0" y1="12" x2="500" y2="12" stroke={isFirstPart ? "black" : "blue"} />
+                </svg>
+                <div
+                    className={isFirstPart ? "Circle" : "Circle Active_Circle"}
+                    onClick={onFormChangeHandlerToSecondPart}
+                >
+                    2
+                </div>
+            </div>
+
             <Form onSubmit={onSubmitHandler}>
                 {
-                    Component
+                    isFirstPart ? <FirstPart /> : <SecondPart />
                 }
             </Form>
 

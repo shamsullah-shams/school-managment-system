@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
 import "../Root.css";
 import AdmitStudent from "./AdmitStudent";
 import StudentPromotion from "./StudentPromotion";
 import StudentInfo from "./StudentInfo";
-import { useDispatch } from "react-redux";
-import { loadTeacher } from "../../Redux/actions/Teacher";
 
 
-const Students = props => {
+const Students = () => {
 
     const [admitStudent, setAdmitStudent] = useState(true);
     const [studentInfo, setStudentInfo] = useState(false);
     const [studentPromotion, setStudentPromotion] = useState(false);
     const [graduatedStudents, setGratuadetStudents] = useState(false);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadTeacher())
-    }, []);
+
 
     const admitStudentHandler = () => {
         setAdmitStudent(true);

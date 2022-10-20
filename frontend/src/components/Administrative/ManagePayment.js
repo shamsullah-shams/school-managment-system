@@ -12,6 +12,7 @@ import Table from "../UI/Table/Table";
 const ManagePayments = () => {
     const [getYear, setGetYear] = useState("");
     const [dbData, setDbData] = useState([]);
+    const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Title", "Class", "Amount", "Year", "Description", "Edit"];
 
@@ -37,13 +38,21 @@ const ManagePayments = () => {
                 ]
             });
             setDbData(newArray);
+            setOldDbData(newArray);
         } catch (error) {
             console.log(error);
         }
     }
 
+    // Filter Outputs
     const onFilterHandler = async (event) => {
-        console.log(event.target.value);
+        if (dbData.length === 0) {
+            return;
+        }
+        const newArray = oldDbData.filter(SingleObject => {
+            return SingleObject[1].includes(event.target.value);
+        });
+        setDbData(newArray);
     }
 
     let year = new Date().toISOString().split("-")[0];

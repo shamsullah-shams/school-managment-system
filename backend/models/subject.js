@@ -12,19 +12,15 @@ const Subject = sequelize.define("Subject", {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     shortName: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     teacher: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     className: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
 });
 

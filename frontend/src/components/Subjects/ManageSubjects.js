@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const ManageSubjects = () => {
 
     const [dbData, setDbData] = useState([]);
+    const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
     const tableHeaders = ["S/N", "Name", "Short Name", "Class", "Teacher", "Edit"];
@@ -41,10 +42,22 @@ const ManageSubjects = () => {
                 ]
             });
             setDbData(newArray);
+            setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
             console.log(error);
         }
+    }
+
+    // Filter Outputs
+    const onFilterHandler = async (event) => {
+        if (dbData.length === 0) {
+            return;
+        }
+        const newArray = oldDbData.filter(SingleObject => {
+            return SingleObject[1].includes(event.target.value);
+        });
+        setDbData(newArray);
     }
 
     return (
@@ -67,6 +80,7 @@ const ManageSubjects = () => {
                     <Table
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
+                        filter={onFilterHandler}
                     />
                 </React.Fragment> : null
             }
