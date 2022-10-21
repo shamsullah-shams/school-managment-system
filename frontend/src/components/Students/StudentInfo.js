@@ -4,7 +4,6 @@ import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
-import { GrEdit } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import Table from "../UI/Table/Table";
 

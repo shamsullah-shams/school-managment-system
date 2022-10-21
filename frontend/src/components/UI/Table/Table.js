@@ -2,7 +2,6 @@ import React from "react";
 import { GrEdit } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
 import "./Table.css";
-import Row from "../Row/Row";
 
 
 
@@ -33,7 +32,7 @@ const Table = props => {
                     </div>
                     <div>
                         <button className="TimeTable__Button">Copy</button>
-                        <button className="TimeTable__Button">Excel</button>
+                        <button className="TimeTable__Button" onClick={props.createExcelFile}>Excel</button>
                         <button className="TimeTable__Button">pdf</button>
                     </div>
                 </div>
@@ -68,7 +67,7 @@ const Table = props => {
                                                         return (
                                                             <td key={property} className="Table__Image">
                                                                 <img
-                                                                    alt="Photo"
+                                                                    alt=""
                                                                     src={`http://localhost:8080/${property}`}
                                                                 />
                                                             </td>

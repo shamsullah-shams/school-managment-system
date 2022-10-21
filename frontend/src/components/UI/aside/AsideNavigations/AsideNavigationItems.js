@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import "./AsideNavigationItems.css";
 import { NavLink } from "react-router-dom"
 import { AiOutlineHome } from "react-icons/ai";
-import { HiAcademicCap, HiHome, HiChartBar } from "react-icons/hi"
+import { HiAcademicCap, HiChartBar } from "react-icons/hi"
 import { MdOutlineAdminPanelSettings, MdLocationOn } from "react-icons/md"
 import { FaUsers } from "react-icons/fa"
 import { HiUsers } from "react-icons/hi"
@@ -10,23 +10,10 @@ import { SiGoogleclassroom } from "react-icons/si"
 import { ImBooks } from "react-icons/im";
 import { RiAccountCircleLine } from "react-icons/ri";
 import Span from "./Span";
-import Context from "../../../../Cotext";
 
-const AsideNavigationItems = props => {
+const AsideNavigationItems = () => {
 
-    const [showStudentSubMenu, setShowStudentSubMenu] = useState(false);
-    const [showAdminSubMenu, setShowAdminSubmenu] = useState(false);
 
-    const { showSideBarSpans } = useContext(Context);
-
-    const showStudentSubMenuHandler = () => {
-        setShowAdminSubmenu(false);
-        setShowStudentSubMenu(!showStudentSubMenu);
-    }
-    const showAdminSubMenuHandler = () => {
-        setShowStudentSubMenu(false);
-        setShowAdminSubmenu(!showAdminSubMenu);
-    }
 
 
     return (

@@ -43,8 +43,6 @@ const CreateTimeTable = props => {
         }
     }
 
-    let date = new Date();
-    let year = date.getFullYear().toString();
 
 
     return (
