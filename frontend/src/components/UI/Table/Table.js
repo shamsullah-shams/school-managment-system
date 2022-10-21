@@ -46,7 +46,7 @@ const Table = props => {
                         <tr>
                             {
                                 props.tableHeaders.map(singleHeader => (
-                                    <th>{singleHeader}</th>
+                                    <th key={singleHeader}>{singleHeader}</th>
                                 ))
                             }
                         </tr>
@@ -55,16 +55,19 @@ const Table = props => {
                         {
                             props.tableBody.map(singleTimeTable => {
                                 return (
-                                    <React.Fragment>
-                                        <tr ><td colSpan={props.tableHeaders.length}><hr /></td></tr>
-                                        <tr key={singleTimeTable[0]}>
+                                    <React.Fragment key={singleTimeTable[1]}>
+                                        <tr>
+                                            <td colSpan={props.tableHeaders.length}>
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             {
                                                 singleTimeTable.map(property => {
                                                     if (property.toString().includes("backend")) {
                                                         return (
-                                                            <td className="Table__Image">
+                                                            <td key={property} className="Table__Image">
                                                                 <img
-
                                                                     alt="Photo"
                                                                     src={`http://localhost:8080/${property}`}
                                                                 />
