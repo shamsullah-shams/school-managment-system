@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "../UI/Table/Table";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 
 
@@ -8,7 +9,7 @@ import Table from "../UI/Table/Table";
 const ManageTimeTables = props => {
     const [timeTable, setTimeTable] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
-    const timeTableHeaders = ["S/N", "Name", "Class", "Type", "Year", "Edit"];
+    const timeTableHeaders = ["S/N", "Name", "Class", "Type", "Year"];
 
     useEffect(() => {
         const getDbTimeTables = async () => {
@@ -36,12 +37,27 @@ const ManageTimeTables = props => {
         setTimeTable(newArray);
     }
 
+    // create and download excel file
+    const createExcelFile = () => {
+
+    }
+
+    // create and download pdf file
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: timeTableHeaders,
+            body: timeTable
+        })
+    }
+
     return (
         <React.Fragment>
             <Table
                 tableHeaders={timeTableHeaders}
                 tableBody={timeTable}
                 filter={onFilterHandler}
+                createExcelFile={createExcelFile}
+                createPdfFile={CreatePDFHandler}
             />
         </React.Fragment>
     );

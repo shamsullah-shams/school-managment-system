@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../UI/Table/Table";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 
 
@@ -10,7 +11,7 @@ const ManageClasses = props => {
     const [oldDbData, setOldDbData] = useState([]);
 
 
-    const tableHeaders = ["S/N", "Name", "Class Type", "Edit"];
+    const tableHeaders = ["S/N", "Name", "Class Type"];
     // Get Data from backend when the component loads
     useEffect(() => {
         const getDbData = async () => {
@@ -47,6 +48,18 @@ const ManageClasses = props => {
         setDbData(newArray);
     }
 
+    // create and download excel file
+    const createExcelFile = () => {
+
+    }
+
+    // create and download pdf
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: tableHeaders,
+            body: dbData
+        })
+    }
 
     return (
         <React.Fragment>
@@ -54,6 +67,8 @@ const ManageClasses = props => {
                 tableHeaders={tableHeaders}
                 tableBody={dbData}
                 filter={onFilterHandler}
+                createExcelFile={createExcelFile}
+                createPdfFile={CreatePDFHandler}
             />
         </React.Fragment>
     );

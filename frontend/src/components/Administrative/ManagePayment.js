@@ -6,6 +6,7 @@ import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import Table from "../UI/Table/Table";
 import CreateExcel from "../CreateExcel/CreateExcel";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 
 
@@ -15,7 +16,7 @@ const ManagePayments = () => {
     const [dbData, setDbData] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
-    const tableHeaders = ["S/N", "Title", "Class", "Amount", "Year", "Description", "Edit"];
+    const tableHeaders = ["S/N", "Title", "Class", "Amount", "Year", "Description"];
 
     // Excel Data 
     const [excelData, setExcelData] = useState();
@@ -55,6 +56,14 @@ const ManagePayments = () => {
         CreateExcel(excelData);
     }
 
+    // Create and Download PDF
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: tableHeaders,
+            body: dbData,
+        });
+    }
+
 
     // Filter Outputs
     const onFilterHandler = async (event) => {
@@ -87,6 +96,7 @@ const ManagePayments = () => {
                         tableBody={dbData}
                         filter={onFilterHandler}
                         createExcelFile={createExcelFile}
+                        createPdfFile={CreatePDFHandler}
                     />
                 </React.Fragment> : null
             }

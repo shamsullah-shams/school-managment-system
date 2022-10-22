@@ -5,6 +5,7 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import Table from "../UI/Table/Table";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 
 const ManageUsers = () => {
@@ -12,7 +13,7 @@ const ManageUsers = () => {
     const [dbData, setDbData] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
-    const tableHeaders = ["S/N", "Photo", "Name", "User Name", "Email", "Edit"]
+    const tableHeaders = ["S/N", "Photo", "Name", "User Name", "Email"]
 
     useEffect(() => {
 
@@ -57,6 +58,18 @@ const ManageUsers = () => {
         setDbData(newArray);
     }
 
+    // create and download excel file
+    const createExcelFile = () => {
+
+    }
+
+    // create and download pdf file
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: tableHeaders,
+            body: dbData,
+        })
+    }
 
     return (
         <React.Fragment>
@@ -78,6 +91,8 @@ const ManageUsers = () => {
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
                         filter={onFilterHandler}
+                        createExcelFile={createExcelFile}
+                        createPdfFile={CreatePDFHandler}
                     />
                 </React.Fragment> : null
             }

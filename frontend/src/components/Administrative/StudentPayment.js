@@ -6,13 +6,14 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import axios from "axios";
 import Table from "../UI/Table/Table";
 import { useSelector } from "react-redux";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 const StudentPayments = () => {
     const [selectedClass, setSelectedClass] = useState("");
     const [dbData, setDbData] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
-    const tableHeaders = ["S/N", "Photo", "Name", "Admission No", "Manage Payments"];
+    const tableHeaders = ["S/N", "Photo", "Name", "Admission No"];
 
     // @@ Fetch Classes from Redux
     const classes = useSelector(state => state.loadTeachers.Classes);
@@ -43,6 +44,19 @@ const StudentPayments = () => {
         } catch (error) {
 
         }
+    }
+
+    // create and download excel file
+    const createExcelFile = () => {
+
+    }
+
+    // create and download pdf file
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: tableHeaders,
+            body: dbData
+        });
     }
 
     // Filter Outputs
@@ -76,6 +90,8 @@ const StudentPayments = () => {
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
                         filter={onFilterHandler}
+                        createExcelFile={createExcelFile}
+                        createPdfFile={CreatePDFHandler}
                     />
                 </React.Fragment> : null
             }

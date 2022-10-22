@@ -6,6 +6,7 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Table from "../UI/Table/Table";
 import { useSelector } from "react-redux";
+import CreatePDF from "../CretaPDF/CreatePDF";
 
 
 const ManageSubjects = () => {
@@ -14,7 +15,7 @@ const ManageSubjects = () => {
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
-    const tableHeaders = ["S/N", "Name", "Short Name", "Class", "Teacher", "Edit"];
+    const tableHeaders = ["S/N", "Name", "Short Name", "Class", "Teacher"];
 
     // Fetch Classes from Redux
     const classes = useSelector(state => state.loadTeachers.classes);
@@ -60,6 +61,19 @@ const ManageSubjects = () => {
         setDbData(newArray);
     }
 
+    // create and download excel file 
+    const createExcelFile = () => {
+
+    }
+
+    // create and download pdf file
+    const CreatePDFHandler = () => {
+        CreatePDF({
+            headers: tableHeaders,
+            body: dbData
+        })
+    }
+
     return (
         <React.Fragment>
             <Form className="Left" onSubmit={onSubmitHandler}>
@@ -81,6 +95,8 @@ const ManageSubjects = () => {
                         tableHeaders={tableHeaders}
                         tableBody={dbData}
                         filter={onFilterHandler}
+                        createExcelFile={createExcelFile}
+                        createPdfFile={CreatePDFHandler}
                     />
                 </React.Fragment> : null
             }

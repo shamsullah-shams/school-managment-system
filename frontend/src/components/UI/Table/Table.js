@@ -1,6 +1,6 @@
 import React from "react";
-import { GrEdit } from "react-icons/gr";
-import { FiSearch } from "react-icons/fi";
+import { GrEdit, } from "react-icons/gr";
+import { FiSearch, FiEye, FiTrash2, } from "react-icons/fi";
 import "./Table.css";
 
 
@@ -31,9 +31,23 @@ const Table = props => {
                         </select>
                     </div>
                     <div>
-                        <button className="TimeTable__Button">Copy</button>
-                        <button className="TimeTable__Button" onClick={props.createExcelFile}>Excel</button>
-                        <button className="TimeTable__Button">pdf</button>
+                        <button
+                            className="TimeTable__Button"
+                        >
+                            Copy
+                        </button>
+                        <button
+                            className="TimeTable__Button"
+                            onClick={props.createExcelFile}
+                        >
+                            Excel
+                        </button>
+                        <button
+                            className="TimeTable__Button"
+                            onClick={props.createPdfFile}
+                        >
+                            pdf
+                        </button>
                     </div>
                 </div>
             </div>
@@ -48,6 +62,7 @@ const Table = props => {
                                     <th key={singleHeader}>{singleHeader}</th>
                                 ))
                             }
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +71,7 @@ const Table = props => {
                                 return (
                                     <React.Fragment key={singleTimeTable[1]}>
                                         <tr>
-                                            <td colSpan={props.tableHeaders.length}>
+                                            <td colSpan={props.tableHeaders.length + 1}>
                                                 <hr />
                                             </td>
                                         </tr>
@@ -81,6 +96,8 @@ const Table = props => {
                                             }
                                             <td>
                                                 <GrEdit />
+                                                <FiEye />
+                                                <FiTrash2 />
                                             </td>
                                         </tr>
                                     </React.Fragment>
