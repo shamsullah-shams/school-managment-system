@@ -35,13 +35,13 @@ const Root = props => {
                     <FaUserAlt />
                 </Box>
             </div>
-            {
+            {/* {
                 showContent ?
                     <Card card title="School Events Calendar" onClick={showContentHandler}>
                         <Calender />
                     </Card>
                     : null
-            }
+            } */}
         </main>
     );
 };

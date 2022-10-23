@@ -33,7 +33,11 @@ const CreatePayments = () => {
             const result = await axios.post("http://localhost:8080/api/admin/payment/create", {
                 payment: payment,
             })
-            console.log(result);
+            let newObject = {};
+            for (let i in payment) {
+                newObject[i] = "";
+            }
+            setPayment({ ...newObject })
         } catch (error) {
             console.log(error);
         }

@@ -35,7 +35,11 @@ const CreateClass = props => {
                 newClass: newClass,
             })
             dispatch(loadTeacher())
-            // console.log(result);
+            let newObject = {};
+            for (let i in newClass) {
+                newObject[i] = "";
+            }
+            setNewClass({ ...newObject })
         } catch (error) {
             console.log(error);
         }

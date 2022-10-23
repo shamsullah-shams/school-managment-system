@@ -44,7 +44,12 @@ const AddSubject = () => {
                 className: newSubject.className,
             });
 
-            // console.log(result);
+            // Clear Old Values
+            let newObject = {};
+            for (let i in newSubject) {
+                newObject[i] = "";
+            }
+            setNewSubject({ ...newObject });
         } catch (error) {
             console.log(error);
         }

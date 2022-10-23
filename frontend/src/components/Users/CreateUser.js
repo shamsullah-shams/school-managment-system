@@ -53,13 +53,18 @@ const CreateUser = props => {
         const formData = new FormData();
 
         for (let value in user) {
-            // console.log(1);
             formData.append(value, user[value]);
         }
 
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/users/ragister", formData);
+            // Clear Old Values
+            let newObject = {};
+            for (let i in user) {
+                newObject[i] = "";
+            }
+            setUser({ ...newObject });
             dispatch(loadTeacher());
         } catch (error) {
             console.log(error);

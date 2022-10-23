@@ -42,6 +42,11 @@ const CreateSection = () => {
                 teacher: section.teacher,
             });
 
+            let newObject = {};
+            for (let i in section) {
+                newObject[i] = "";
+            }
+            setSection({ ...newObject });
             dispatch(loadTeacher());
         } catch (error) {
             console.log(error);
