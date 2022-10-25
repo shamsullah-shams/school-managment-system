@@ -78,6 +78,7 @@ const StudentPayments = () => {
                         label="Class"
                         options={classes}
                         onChange={onChangeHandler}
+                        value={selectedClass}
                     />
                 </Row>
                 <Row>

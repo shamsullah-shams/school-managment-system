@@ -6,6 +6,8 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import { useSelector } from "react-redux"
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -43,58 +45,66 @@ const AddSubject = () => {
                 teacher: newSubject.teacher,
                 className: newSubject.className,
             });
-
-            // Clear Old Values
-            let newObject = {};
-            for (let i in newSubject) {
-                newObject[i] = "";
+            if (result.status === 200) {
+                // Clear Old Values
+                let newObject = {};
+                for (let i in newSubject) {
+                    newObject[i] = "";
+                }
+                setNewSubject({ ...newObject });
+                // show toast succes message
+                toast.success("Subject successfully added");
             }
-            setNewSubject({ ...newObject });
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
     return (
-        <Form className="Left" onSubmit={onSubmitHandler}>
-            <Row>
-                <InputElement
-                    label="Name"
-                    placeholder="Name of Subject"
-                    value={newSubject.name}
-                    name="name"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <InputElement
-                    label="Short Name"
-                    placeholder="Example B.eng"
-                    value={newSubject.shortName}
-                    name="shortName"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Class"
-                    options={classes}
-                    name="className"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Teacher"
-                    options={teachers}
-                    name="teacher"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <Buttons title="Submit" />
-            </Row>
-        </Form>
+        <React.Fragment>
+            <ToastContainer autoClose={5000} />
+            <Form className="Left" onSubmit={onSubmitHandler}>
+                <Row>
+                    <InputElement
+                        label="Name"
+                        placeholder="Name of Subject"
+                        value={newSubject.name}
+                        name="name"
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <InputElement
+                        label="Short Name"
+                        placeholder="Example B.eng"
+                        value={newSubject.shortName}
+                        name="shortName"
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Class"
+                        options={classes}
+                        name="className"
+                        value={newSubject.className}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Teacher"
+                        options={teachers}
+                        name="teacher"
+                        value={newSubject.teacher}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <Buttons title="Submit" />
+                </Row>
+            </Form>
+        </React.Fragment>
     );
 }
 

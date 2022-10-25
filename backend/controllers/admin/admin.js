@@ -42,8 +42,12 @@ export const RagisterStudent = async (req, res, next) => {
         className,
     } = req.body;
 
-
-    const imageUrl = req.file.path;
+    let imageUrl;
+    try {
+        imageUrl = req.file.path;
+    } catch (error) {
+        console.log(error.message);
+    }
     const NStudent = new Student({
         fullName,
         address,
@@ -132,7 +136,12 @@ export const RagisterUser = (req, res, next) => {
         bloodGroup,
     } = req.body;
 
-    const imageUrl = req.file.path;
+    let imageUrl;
+    try {
+        imageUrl = req.file.path;
+    } catch (error) {
+        console.log(error);
+    }
 
     const NUser = new User({
         userType,

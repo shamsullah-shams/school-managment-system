@@ -79,6 +79,7 @@ const ManageSections = props => {
                         onChange={onChangeHandler}
                         label="Class"
                         options={classes}
+                        value={selectedClass}
                     />
                 </Row>
                 <Row>

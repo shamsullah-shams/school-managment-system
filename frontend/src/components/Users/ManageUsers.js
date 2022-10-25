@@ -78,6 +78,7 @@ const ManageUsers = () => {
                     <SelectElement
                         label="User Type"
                         options={["Teacher", "Accountant", "Parent"]}
+                        value={selectedType}
                         onChange={onChangeHandler}
                     />
                 </Row>

@@ -45,6 +45,7 @@ const ManageClasses = props => {
         const newArray = oldDbData.filter(SingleObject => {
             return SingleObject[1].includes(event.target.value);
         });
+        console.log(newArray)
         setDbData(newArray);
     }
 

@@ -5,6 +5,8 @@ import axios from "axios";
 import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import { useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -37,9 +39,18 @@ const StudentPromotion = props => {
         event.preventDefault(event);
         try {
             const result = await axios.post("http://localhost:8080/api/admin/students/promote", data);
-            // console.log(result);
+            if (result.status === 200) {
+                // clear old values
+                let newObject = {};
+                for (let i in data) {
+                    newObject[i] = "";
+                }
+                setData(newObject);
+                // show toast success message
+                toast.success("Student Promotion is successed");
+            }
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -52,24 +63,28 @@ const StudentPromotion = props => {
                         onChange={onChangeHandler}
                         label="From Class"
                         name="fromClass"
+                        value={data.fromClass}
                         options={classes}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="From Section"
                         name="fromSection"
+                        value={data.fromSection}
                         options={sections}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="To Class"
                         name="toClass"
+                        value={data.toClass}
                         options={classes}
                     />
                     <SelectElement
                         onChange={onChangeHandler}
                         label="To Section"
                         name="toSection"
+                        value={data.toSection}
                         options={sections}
                     />
                 </Row>

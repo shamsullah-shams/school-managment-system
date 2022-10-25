@@ -7,9 +7,13 @@ import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import { useDispatch } from "react-redux";
 import { loadTeacher } from "../../Redux/actions/Teacher";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateClass = props => {
+
+
 
     const [newClass, setNewClass] = useState({
         name: "",
@@ -33,42 +37,54 @@ const CreateClass = props => {
         try {
             const result = await axios.post("http://localhost:8080/api/admin/classes/create", {
                 newClass: newClass,
-            })
-            dispatch(loadTeacher())
-            let newObject = {};
-            for (let i in newClass) {
-                newObject[i] = "";
+            });
+            console.log(result);
+
+            if (result.status === 200) {
+                // Dispatch New Action from Redux
+                dispatch(loadTeacher());
+                // display a toast success message
+                toast.success("Class is added");
+                // clear old input values
+                let newObject = {};
+                for (let i in newClass) {
+                    newObject[i] = "";
+                }
+                setNewClass({ ...newObject });
             }
-            setNewClass({ ...newObject })
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
     return (
-        <Form className="Left" onSubmit={onSubmitHandler} >
-            <Row>
-                <InputElement
-                    label="Class Name"
-                    placeholder="Class Name"
-                    name="name"
-                    value={newClass.name}
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Class Type"
-                    options={["Primary", "Secondary", "Nurssry", "intermediat"]}
-                    name="type"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <Buttons title="Submit" />
+        <React.Fragment>
+            <ToastContainer autoClose={5000} />
+            <Form className="Left" >
+                <Row>
+                    <InputElement
+                        label="Class Name"
+                        placeholder="Class Name"
+                        name="name"
+                        value={newClass.name}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Class Type"
+                        options={["Primary", "Secondary", "Nurssry", "intermediat"]}
+                        name="type"
+                        value={newClass.type}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <Buttons title="Submit" onClick={onSubmitHandler} />
 
-            </Row>
-        </Form>
+                </Row>
+            </Form>
+        </React.Fragment>
     );
 }
 

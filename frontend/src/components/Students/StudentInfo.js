@@ -82,7 +82,12 @@ const StudentInfo = props => {
         <React.Fragment>
             <Form onSubmit={onSubmitHandler} className="Left">
                 <Row>
-                    <SelectElement label="Class" options={classes} onChange={onChangeHandler} />
+                    <SelectElement
+                        label="Class"
+                        options={classes}
+                        onChange={onChangeHandler}
+                        value={selectedClass}
+                    />
                 </Row>
                 <Buttons title="Submit" />
             </Form>

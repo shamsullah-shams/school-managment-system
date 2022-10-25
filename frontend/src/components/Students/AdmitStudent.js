@@ -7,6 +7,8 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import Buttons from "../UI/Button/Buttons";
 import { useSelector } from "react-redux";
 import "./AdmitStudent.css";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -67,9 +69,19 @@ const AdmitStudent = props => {
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/student/ragister", formData);
-            // console.log(result);
+            if (result.status === 200) {
+                // clear old values
+                let newObject = {};
+                for (let i in student) {
+                    newObject[i] = "";
+                }
+                setStudent({ ...newObject });
+                // show toast success messsage
+                toast.success("Student is Added");
+            }
         } catch (error) {
-            console.log(error);
+            // show toast error message
+            toast.error(error.message);
         }
     }
 
@@ -94,18 +106,21 @@ const AdmitStudent = props => {
                     label="Class"
                     options={classes}
                     name="className"
+                    value={student.className}
                     onChange={onChangeHandler}
                 />
                 <SelectElement
                     label="Section"
                     options={sections}
                     name="section"
+                    value={student.section}
                     onChange={onChangeHandler}
                 />
                 <SelectElement
                     label="Parent"
                     options={parents}
                     name="parent"
+                    value={student.parent}
                     onChange={onChangeHandler}
                 />
                 <InputElement
@@ -153,6 +168,7 @@ const AdmitStudent = props => {
                     label="Gender"
                     options={["Male", "Female"]}
                     name="gender"
+                    value={student.gender}
                     onChange={onChangeHandler}
                 />
                 <InputElement
@@ -177,12 +193,14 @@ const AdmitStudent = props => {
                     label="Nationality"
                     options={["Afghan", "Indian", "pakistani", "Americon"]}
                     name="nationality"
+                    value={student.nationality}
                     onChange={onChangeHandler}
                 />
                 <SelectElement
                     label="State"
                     options={["Amreica", "Asia", "Urop", "North America"]}
                     name="state"
+                    value={student.state}
                     onChange={onChangeHandler}
                 />
             </Row>
@@ -191,6 +209,7 @@ const AdmitStudent = props => {
                     label="Blood Group"
                     options={["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]}
                     name="bloodGroup"
+                    value={student.bloodGroup}
                     onChange={onChangeHandler}
                 />
                 <InputElement
@@ -212,6 +231,7 @@ const AdmitStudent = props => {
 
     return (
         <React.Fragment>
+            <ToastContainer autoClose={5000} />
             <div className="Group__Div">
                 <div
                     className="Circle Active_Circle"

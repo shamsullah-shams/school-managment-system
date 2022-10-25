@@ -81,6 +81,7 @@ const ManageSubjects = () => {
                     <SelectElement
                         onChange={onChangeHandler}
                         label="Class"
+                        value={selectedClass}
                         options={classes}
                     />
                 </Row>

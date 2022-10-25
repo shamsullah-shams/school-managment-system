@@ -7,6 +7,8 @@ import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Buttons from "../UI/Button/Buttons";
 import { useDispatch } from "react-redux";
 import { loadTeacher } from "../../Redux/actions/Teacher";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -59,133 +61,145 @@ const CreateUser = props => {
 
         try {
             const result = await axios.post("http://localhost:8080/api/admin/users/ragister", formData);
-            // Clear Old Values
-            let newObject = {};
-            for (let i in user) {
-                newObject[i] = "";
+            if (result.status === 200) {
+                // Clear Old Values
+                let newObject = {};
+                for (let i in user) {
+                    newObject[i] = "";
+                }
+                setUser({ ...newObject });
+                dispatch(loadTeacher());
+                // show success toast message
+                toast.success("User is Successfully added");
             }
-            setUser({ ...newObject });
-            dispatch(loadTeacher());
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
     return (
-        <Form onSubmit={onSubmitHandler}>
-            <Row>
-                <SelectElement
-                    label="User Type"
-                    options={["Accountant", "Parent", "Teacher"]}
-                    onChange={onChangeHandler}
-                    name="userType"
-                    required
-                />
-                <InputElement
-                    placeholder="Full Name"
-                    label="Full Name"
-                    onChange={onChangeHandler}
-                    value={user.fullName}
-                    name="fullName"
-                    required
-                />
-                <InputElement
-                    placeholder="Address"
-                    label="Address"
-                    onChange={onChangeHandler}
-                    value={user.address}
-                    name="address"
-                    required
-                />
-            </Row>
-            <Row>
-                <InputElement
-                    placeholder="Email Address"
-                    label="Email Address"
-                    onChange={onChangeHandler}
-                    value={user.email}
-                    name="email"
-                    required
-                />
-                <InputElement
-                    placeholder="User Name"
-                    label="User Name"
-                    onChange={onChangeHandler}
-                    value={user.userName}
-                    name="userName"
-                    required
-                />
-                <InputElement
-                    placeholder="Phone"
-                    type="tel"
-                    label="Phone"
-                    onChange={onChangeHandler}
-                    value={user.phone}
-                    name="phone"
-                    required
-                />
-            </Row>
-            <Row>
-                <InputElement
-                    placeholder="Date of Student"
-                    type="date"
-                    label="Date Of Student"
-                    onChange={onChangeHandler}
-                    value={user.dateOfBirth}
-                    name="dateOfBirth"
-                    required
-                />
-                <InputElement
-                    placeholder="password"
-                    type="password"
-                    label="Password"
-                    onChange={onChangeHandler}
-                    value={user.password}
-                    name="password"
-                    required
-                />
-                <SelectElement
-                    label="Gender"
-                    options={["Male", "Female"]}
-                    onChange={onChangeHandler}
-                    name="gender"
-                    required
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Nationality"
-                    options={["Afghan", "Indian", "American"]}
-                    onChange={onChangeHandler}
-                    name="nationality"
-                    required
-                />
-                <SelectElement
-                    label="State"
-                    options={["Kdr", "Kbl", "Hrt"]}
-                    onChange={onChangeHandler}
-                    name="state"
-                    required
-                />
-                <SelectElement
-                    label="Blood Group"
-                    options={["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]}
-                    onChange={onChangeHandler}
-                    name="bloodGroup"
-                    required
-                />
-            </Row>
-            <Row>
-                <InputElement
-                    label="profile picture"
-                    type="file"
-                    name="image"
-                    onChange={onChangeHandler}
-                    required
-                />
-                <Buttons title="Submit" />
-            </Row>
-        </Form>
+        <React.Fragment>
+            <ToastContainer autoClose={5000} />
+            <Form onSubmit={onSubmitHandler}>
+                <Row>
+                    <SelectElement
+                        label="User Type"
+                        options={["Accountant", "Parent", "Teacher"]}
+                        value={user.userType}
+                        onChange={onChangeHandler}
+                        name="userType"
+                        required
+                    />
+                    <InputElement
+                        placeholder="Full Name"
+                        label="Full Name"
+                        onChange={onChangeHandler}
+                        value={user.fullName}
+                        name="fullName"
+                        required
+                    />
+                    <InputElement
+                        placeholder="Address"
+                        label="Address"
+                        onChange={onChangeHandler}
+                        value={user.address}
+                        name="address"
+                        required
+                    />
+                </Row>
+                <Row>
+                    <InputElement
+                        placeholder="Email Address"
+                        label="Email Address"
+                        onChange={onChangeHandler}
+                        value={user.email}
+                        name="email"
+                        required
+                    />
+                    <InputElement
+                        placeholder="User Name"
+                        label="User Name"
+                        onChange={onChangeHandler}
+                        value={user.userName}
+                        name="userName"
+                        required
+                    />
+                    <InputElement
+                        placeholder="Phone"
+                        type="tel"
+                        label="Phone"
+                        onChange={onChangeHandler}
+                        value={user.phone}
+                        name="phone"
+                        required
+                    />
+                </Row>
+                <Row>
+                    <InputElement
+                        placeholder="Date of Student"
+                        type="date"
+                        label="Date Of Student"
+                        onChange={onChangeHandler}
+                        value={user.dateOfBirth}
+                        name="dateOfBirth"
+                        required
+                    />
+                    <InputElement
+                        placeholder="password"
+                        type="password"
+                        label="Password"
+                        onChange={onChangeHandler}
+                        value={user.password}
+                        name="password"
+                        required
+                    />
+                    <SelectElement
+                        label="Gender"
+                        options={["Male", "Female"]}
+                        value={user.gender}
+                        onChange={onChangeHandler}
+                        name="gender"
+                        required
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Nationality"
+                        options={["Afghan", "Indian", "American"]}
+                        value={user.nationality}
+                        onChange={onChangeHandler}
+                        name="nationality"
+                        required
+                    />
+                    <SelectElement
+                        label="State"
+                        options={["Kdr", "Kbl", "Hrt"]}
+                        value={user.state}
+                        onChange={onChangeHandler}
+                        name="state"
+                        required
+                    />
+                    <SelectElement
+                        label="Blood Group"
+                        options={["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]}
+                        value={user.bloodGroup}
+                        onChange={onChangeHandler}
+                        name="bloodGroup"
+                        required
+                    />
+                </Row>
+                <Row>
+                    <InputElement
+                        label="profile picture"
+                        type="file"
+                        name="image"
+                        onChange={onChangeHandler}
+                        required
+                    />
+                    <Buttons title="Submit" />
+                </Row>
+            </Form>
+        </React.Fragment>
     );
 }
 

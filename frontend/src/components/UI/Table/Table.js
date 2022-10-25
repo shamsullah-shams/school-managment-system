@@ -69,7 +69,7 @@ const Table = props => {
                         {
                             props.tableBody.map(singleTimeTable => {
                                 return (
-                                    <React.Fragment key={singleTimeTable[1]}>
+                                    <React.Fragment key={singleTimeTable[0]}>
                                         <tr>
                                             <td colSpan={props.tableHeaders.length + 1}>
                                                 <hr />

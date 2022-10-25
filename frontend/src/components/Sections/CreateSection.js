@@ -7,6 +7,8 @@ import Buttons from "../UI/Button/Buttons";
 import Row from "../UI/Row/Row";
 import { useSelector, useDispatch } from "react-redux";
 import { loadTeacher } from "../../Redux/actions/Teacher";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -36,55 +38,61 @@ const CreateSection = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/sections/create", {
-                name: section.name,
-                className: section.className,
-                teacher: section.teacher,
-            });
-
-            let newObject = {};
-            for (let i in section) {
-                newObject[i] = "";
+            const result = await axios.post("http://localhost:8080/api/admin/sections/create", { ...section });
+            if (result.status === 200) {
+                // clear old values
+                let newObject = {};
+                for (let i in section) {
+                    newObject[i] = "";
+                }
+                setSection({ ...newObject });
+                // dispatch new Action from Redux
+                dispatch(loadTeacher());
+                // show toast success message
+                toast.success("Section is Added");
             }
-            setSection({ ...newObject });
-            dispatch(loadTeacher());
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
 
     return (
-        <Form className="Left" onSubmit={onSubmitHandler}>
-            <Row>
-                <InputElement
-                    label="Name"
-                    placeholder="Section Name"
-                    value={section.name}
-                    name="name"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Select Class"
-                    options={classes}
-                    name="className"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <SelectElement
-                    label="Teacher"
-                    options={teachers}
-                    name="teacher"
-                    onChange={onChangeHandler}
-                />
-            </Row>
-            <Row>
-                <Buttons title="Submit" />
-            </Row>
-        </Form>
+        <React.Fragment>
+            <ToastContainer autoClose={5000} />
+            <Form className="Left" onSubmit={onSubmitHandler}>
+                <Row>
+                    <InputElement
+                        label="Name"
+                        placeholder="Section Name"
+                        value={section.name}
+                        name="name"
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Select Class"
+                        options={classes}
+                        name="className"
+                        value={section.className}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <SelectElement
+                        label="Teacher"
+                        options={teachers}
+                        name="teacher"
+                        value={section.teacher}
+                        onChange={onChangeHandler}
+                    />
+                </Row>
+                <Row>
+                    <Buttons title="Submit" />
+                </Row>
+            </Form>
+        </React.Fragment>
     );
 }
 
