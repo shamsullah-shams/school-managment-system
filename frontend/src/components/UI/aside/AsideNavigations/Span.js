@@ -2,24 +2,32 @@ import React, { useContext } from "react";
 import Context from "../../../../Cotext";
 import "./AsideNavigationItems.css";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
+import { AnimatePresence, motion } from "framer-motion";
+
+
 
 const Span = props => {
 
     const { showSideBarSpans } = useContext(Context);
 
     return (
-        <React.Fragment>
+        <AnimatePresence>
             {
-                showSideBarSpans ? <React.Fragment>
-                    <span className="Span">
+                showSideBarSpans && <React.Fragment>
+                    <motion.span
+                        className="Span"
+                        initial={{ opacity: 0, y: 0, }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
                         {props.title}
                         {
                             props.subMenu ? props.showSubNav ? <BsChevronDown /> : <BsChevronRight /> : null
                         }
-                    </span>
-                </React.Fragment> : null
+                    </motion.span>
+                </React.Fragment>
             }
-        </React.Fragment>
+        </AnimatePresence>
     );
 };
 

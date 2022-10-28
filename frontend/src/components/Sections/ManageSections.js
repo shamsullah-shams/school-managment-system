@@ -7,7 +7,14 @@ import Row from "../UI/Row/Row";
 import Table from "../UI/Table/Table";
 import { useSelector } from "react-redux";
 import CreatePDF from "../CretaPDF/CreatePDF";
+import { AnimatePresence } from "framer-motion";
+import Model from "../UI/Model/Model";
+import { ToastContainer, toast } from "react-toastify";
 
+
+
+// to store clicked item id
+let selectedItemId;
 
 
 const ManageSections = props => {
@@ -16,6 +23,37 @@ const ManageSections = props => {
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
     const tableHeaders = ["S/N", "Name", "Class Name", "Teacher"];
+    const [showModel, setShowModel] = useState(false);
+    // show model
+    const showModelHandler = (id) => {
+        selectedItemId = id;
+        setShowModel(true);
+    }
+
+    // when user press the cancel button we hide the model
+    const onCancelHandler = () => {
+        setShowModel(false);
+    }
+
+    // when user press confirm button we delete the data and hide the model
+    const onDeleteHandler = async () => {
+        setShowModel(false);
+
+        try {
+            await axios.get(`http://localhost:8080/api/admin/sections/delete/${selectedItemId}`);
+            onSubmitHandler();
+            toast.success("Time Table is Deleted");
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+
+
+
+
+
+
 
     // @@ fetch classes from Redux
     const classes = useSelector(state => state.loadTeachers.Classes);
@@ -27,14 +65,14 @@ const ManageSections = props => {
 
     // @@ handling form submission
     const onSubmitHandler = async (event) => {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         try {
             const result = await axios.get(`http://localhost:8080/api/admin/sections/${selectedClass}`);
-            let counter = 0;
             const newArray = result.data.map(SingleObject => {
-                counter++;
                 return [
-                    counter,
+                    SingleObject.id,
                     SingleObject.name,
                     SingleObject.className,
                     SingleObject.teacher,
@@ -44,7 +82,7 @@ const ManageSections = props => {
             setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -73,6 +111,23 @@ const ManageSections = props => {
     }
     return (
         <React.Fragment>
+            {/* Showing Model Conditionally */}
+            <AnimatePresence onExitComplete={onCancelHandler}>
+                {
+                    showModel && (
+                        <Model
+                            onExitComplete={onCancelHandler}
+                            confirm={onDeleteHandler}
+                            message="Section"
+                        />
+                    )
+                }
+            </AnimatePresence>
+            {/* Showing Toast Notification */}
+            <ToastContainer
+                autoClose={5000}
+                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
+            />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <SelectElement
@@ -95,6 +150,7 @@ const ManageSections = props => {
                         filter={onFilterHandler}
                         createExcelFile={createExcelFile}
                         createPdfFile={CreatePDFHandler}
+                        showModel={showModelHandler}
                     />
                 </React.Fragment> : null
             }

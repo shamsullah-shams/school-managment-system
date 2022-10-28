@@ -62,7 +62,11 @@ const AddSubject = () => {
 
     return (
         <React.Fragment>
-            <ToastContainer autoClose={5000} />
+            {/* Showing Toast Notification */}
+            <ToastContainer
+                autoClose={5000}
+                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
+            />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <InputElement

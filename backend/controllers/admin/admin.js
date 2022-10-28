@@ -8,7 +8,6 @@ import User from "../../models/user.js";
 
 export const CreateClass = async (req, res, next) => {
     const { newClass } = req.body;
-    console.log(newClass)
 
     const NC = new Classes({
         className: newClass.name,
@@ -17,10 +16,9 @@ export const CreateClass = async (req, res, next) => {
 
     try {
         const result = await NC.save();
-        console.log(result);
         return res.send(result);
     } catch (error) {
-        return console.log(error);
+        return res.send(error);
     }
 }
 
@@ -42,12 +40,8 @@ export const RagisterStudent = async (req, res, next) => {
         className,
     } = req.body;
 
-    let imageUrl;
-    try {
-        imageUrl = req.file.path;
-    } catch (error) {
-        console.log(error.message);
-    }
+    let imageUrl = req.file ? req.file.path : null;
+
     const NStudent = new Student({
         fullName,
         address,
@@ -67,10 +61,8 @@ export const RagisterStudent = async (req, res, next) => {
 
     try {
         const result = await NStudent.save();
-        console.log(result);
         return res.send(result);
     } catch (error) {
-        console.log(error);
         return res.send(error)
     }
 };
@@ -91,7 +83,7 @@ export const CreateTimeTable = (req, res, next) => {
         const result = NT.save();
         return res.send(result);
     } catch (error) {
-        return console.log(error);
+        return res.send(error);
     }
 }
 
@@ -113,7 +105,7 @@ export const CreatePayment = async (req, res, next) => {
         const result = await newPayment.save();
         return res.send(result);
     } catch (error) {
-        return console.log(error);
+        return res.send(error);
     }
 }
 
@@ -136,12 +128,7 @@ export const RagisterUser = (req, res, next) => {
         bloodGroup,
     } = req.body;
 
-    let imageUrl;
-    try {
-        imageUrl = req.file.path;
-    } catch (error) {
-        console.log(error);
-    }
+    let imageUrl = req.file ? req.file.path : null;
 
     const NUser = new User({
         userType,
@@ -218,26 +205,12 @@ export const GetAllTimeTables = async (req, res, next) => {
                 d.dataValues.year,
             ]
         });
-        console.log(timeTables);
         return res.send(timeTables);
 
     } catch (error) {
         return res.send(error);
     }
 }
-
-
-// Return Payments of One Year from Database 
-// export const GetAllPayments = async (req, res, next) => {
-//     console.log("sime")
-//     // try {
-//     //     const payments = await Payment.findAll();
-//     //     console.log(payments);
-//     //     return res.send(payments);
-//     // } catch (error) {
-//     //     return res.send(payments);
-//     // }
-// }
 
 
 export const GetPaymentsOfOneYear = async (req, res, next) => {
@@ -256,7 +229,7 @@ export const GetPaymentsOfOneYear = async (req, res, next) => {
         });
         return res.send(newArrayOfPayments);
     } catch (error) {
-        return console.log(error.message);
+        return res.send(error);
     }
 }
 
@@ -276,10 +249,9 @@ export const GetSelectedClassStudends = async (req, res, next) => {
                 email: singleStudent.dataValues.email,
             }
         });
-        console.log(result);
         return res.send(resultArray);
     } catch (error) {
-        return console.log(error);
+        return res.send(error);
     }
 }
 
@@ -295,7 +267,6 @@ export const PromoteStudents = async (req, res, next) => {
             { className: toClass, section: toSection },
             { where: { className: fromClass, section: fromSection } }
         )
-        console.log(result);
         return res.send(result);
     } catch (error) {
         return res.send(error);
@@ -352,7 +323,6 @@ export const GetAllSections = async (req, res, next) => {
 export const GetAllSubjects = async (req, res, next) => {
     const { selectedClass } = req.params;
 
-    console.log("selectedClass", selectedClass);
 
     try {
         const result = await Subject.findAll({
@@ -361,17 +331,15 @@ export const GetAllSubjects = async (req, res, next) => {
             }
         });
         const newArray = result.map(SingleObject => SingleObject.dataValues);
-        console.log("new Array", newArray);
         return res.send(newArray);
     } catch (error) {
-        console.log(error);
+        return res.send(error);
     }
 }
 
 
 // Get All Teachers Name 
 export const GetAllTeachers = async (req, res, next) => {
-    console.log("req")
     try {
         let result = await User.findAll(
             {
@@ -410,3 +378,4 @@ export const GetAllTeachers = async (req, res, next) => {
         return res.send(error);
     }
 }
+

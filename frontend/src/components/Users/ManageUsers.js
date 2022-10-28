@@ -6,14 +6,51 @@ import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import Table from "../UI/Table/Table";
 import CreatePDF from "../CretaPDF/CreatePDF";
+import { toast, ToastContainer } from "react-toastify";
+import { AnimatePresence } from "framer-motion";
+import Model from "../UI/Model/Model";
+
+
+// to store clicked item id
+let selectedItemId;
 
 
 const ManageUsers = () => {
+
+
     const [selectedType, setSelectedType] = useState("");
     const [dbData, setDbData] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "User Name", "Email"]
+    const [showModel, setShowModel] = useState(false);
+    // show model
+    const showModelHandler = (id) => {
+        selectedItemId = id;
+        setShowModel(true);
+    }
+
+    // when user press the cancel button we hide the model
+    const onCancelHandler = () => {
+        setShowModel(false);
+    }
+
+    // when user press confirm button we delete the data and hide the model
+    const onDeleteHandler = async () => {
+        setShowModel(false);
+
+        try {
+            await axios.get(`http://localhost:8080/api/admin/users/delete/${selectedItemId}`);
+            onSubmitHandler();
+            toast.success("User is Deleted");
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+
+
+
 
     useEffect(() => {
 
@@ -24,14 +61,15 @@ const ManageUsers = () => {
     }
 
     const onSubmitHandler = async (event) => {
-        event.preventDefault(event);
+        if (event) {
+            event.preventDefault(event);
+        }
         try {
             const result = await axios.get(`http://localhost:8080/api/admin/users/${selectedType}`);
-            let counter = 0;
+
             const newArray = result.data.map(SingleObject => {
-                counter++;
                 return [
-                    counter,
+                    SingleObject.id,
                     SingleObject.imageUrl,
                     SingleObject.fullName,
                     SingleObject.userName,
@@ -42,7 +80,7 @@ const ManageUsers = () => {
             setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -73,6 +111,24 @@ const ManageUsers = () => {
 
     return (
         <React.Fragment>
+            {/* Showing Model Conditionally */}
+            <AnimatePresence onExitComplete={onCancelHandler}>
+                {
+                    showModel && (
+                        <Model
+                            onExitComplete={onCancelHandler}
+                            confirm={onDeleteHandler}
+                            message="User"
+
+                        />
+                    )
+                }
+            </AnimatePresence>
+            {/* Showing Toast Notification */}
+            <ToastContainer
+                autoClose={5000}
+                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
+            />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <SelectElement
@@ -94,6 +150,7 @@ const ManageUsers = () => {
                         filter={onFilterHandler}
                         createExcelFile={createExcelFile}
                         createPdfFile={CreatePDFHandler}
+                        showModel={showModelHandler}
                     />
                 </React.Fragment> : null
             }

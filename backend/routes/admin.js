@@ -18,6 +18,15 @@ import {
     RagisterStudent,
     RagisterUser,
 } from "../controllers/admin/admin.js";
+import {
+    DeleteSingleClass,
+    DeleteSinglePayment,
+    DeleteSingleSection,
+    DeleteSingleStudent,
+    DeleteSingleSubject,
+    DeleteSingleTimetable,
+    DeleteSingleUser
+} from "../controllers/admin/adminDeleteController.js";
 
 const adminRoutes = Express.Router();
 
@@ -48,6 +57,16 @@ adminRoutes.post("/users/ragister", upload.single("image"), RagisterUser);
 adminRoutes.post("/sections/create", CreateSection);
 adminRoutes.post("/subjects/create", CreateSubject);
 adminRoutes.post("/students/promote", PromoteStudents);
+
+
+// @@ Delete Requests 
+adminRoutes.get("/payment/delete/:id", DeleteSinglePayment);
+adminRoutes.get("/timetable/delete/:id", DeleteSingleTimetable);
+adminRoutes.get("/classes/delete/:id", DeleteSingleClass);
+adminRoutes.get("/sections/delete/:id", DeleteSingleSection);
+adminRoutes.get("/students/delete/:id", DeleteSingleStudent);
+adminRoutes.get("/subjects/delete/:id", DeleteSingleSubject);
+adminRoutes.get("/users/delete/:id", DeleteSingleUser);
 
 
 export default adminRoutes;

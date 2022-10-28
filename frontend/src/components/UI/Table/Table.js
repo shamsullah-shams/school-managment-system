@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GrEdit, } from "react-icons/gr";
 import { FiSearch, FiEye, FiTrash2, } from "react-icons/fi";
 import "./Table.css";
@@ -6,6 +6,7 @@ import "./Table.css";
 
 
 const Table = props => {
+
     return (
         <React.Fragment>
             <div className="Timetable__Header DisplayFlex">
@@ -67,9 +68,9 @@ const Table = props => {
                     </thead>
                     <tbody>
                         {
-                            props.tableBody.map(singleTimeTable => {
+                            props.tableBody.map(SingleObject => {
                                 return (
-                                    <React.Fragment key={singleTimeTable[0]}>
+                                    <React.Fragment key={SingleObject[0]}>
                                         <tr>
                                             <td colSpan={props.tableHeaders.length + 1}>
                                                 <hr />
@@ -77,19 +78,19 @@ const Table = props => {
                                         </tr>
                                         <tr>
                                             {
-                                                singleTimeTable.map(property => {
-                                                    if (property.toString().includes("backend")) {
+                                                SingleObject.map(SingleProperty => {
+                                                    if (SingleProperty.toString().includes("backend")) {
                                                         return (
-                                                            <td key={property} className="Table__Image">
+                                                            <td key={SingleProperty} className="Table__Image">
                                                                 <img
                                                                     alt=""
-                                                                    src={`http://localhost:8080/${property}`}
+                                                                    src={`http://localhost:8080/${SingleProperty}`}
                                                                 />
                                                             </td>
                                                         );
                                                     } else {
                                                         return (
-                                                            <td key={property}>{property}</td>
+                                                            <td key={SingleProperty}>{SingleProperty}</td>
                                                         )
                                                     }
                                                 })
@@ -97,14 +98,13 @@ const Table = props => {
                                             <td>
                                                 <GrEdit />
                                                 <FiEye />
-                                                <FiTrash2 />
+                                                <FiTrash2 onClick={() => { props.showModel(SingleObject[0]) }} />
                                             </td>
                                         </tr>
                                     </React.Fragment>
                                 )
                             })
                         }
-
                     </tbody>
                 </table>
             }

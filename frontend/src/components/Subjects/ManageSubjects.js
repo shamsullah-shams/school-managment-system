@@ -7,18 +7,51 @@ import Row from "../UI/Row/Row";
 import Table from "../UI/Table/Table";
 import { useSelector } from "react-redux";
 import CreatePDF from "../CretaPDF/CreatePDF";
+import { AnimatePresence } from "framer-motion";
+import { toast, ToastContainer } from "react-toastify";
+import Model from "../UI/Model/Model";
+
+
+// to store clicked item id
+let selectedItemId;
 
 
 const ManageSubjects = () => {
+
+    // Fetch Classes from Redux
+    const classes = useSelector(state => state.loadTeachers.Classes);
+
 
     const [dbData, setDbData] = useState([]);
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const [selectedClass, setSelectedClass] = useState("");
     const tableHeaders = ["S/N", "Name", "Short Name", "Class", "Teacher"];
+    const [showModel, setShowModel] = useState(false);
+    // show model
+    const showModelHandler = (id) => {
+        selectedItemId = id;
+        setShowModel(true);
+    }
 
-    // Fetch Classes from Redux
-    const classes = useSelector(state => state.loadTeachers.classes);
+    // when user press the cancel button we hide the model
+    const onCancelHandler = () => {
+        setShowModel(false);
+    }
+
+    // when user press confirm button we delete the data and hide the model
+    const onDeleteHandler = async () => {
+        setShowModel(false);
+
+        try {
+            await axios.get(`http://localhost:8080/api/admin/subjects/delete/${selectedItemId}`);
+            onSubmitHandler();
+            toast.success("Subject is Deleted");
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
 
 
     // @@ handling input changes
@@ -28,14 +61,14 @@ const ManageSubjects = () => {
 
     // @@ handling form submission
     const onSubmitHandler = async (event) => {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         try {
             const result = await axios.get(`http://localhost:8080/api/admin/subjects/${selectedClass}`);
-            let counter = 0;
             const newArray = result.data.map(SingleObject => {
-                counter++;
                 return [
-                    counter,
+                    SingleObject.id,
                     SingleObject.name,
                     SingleObject.shortName,
                     SingleObject.className,
@@ -46,7 +79,7 @@ const ManageSubjects = () => {
             setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-            console.log(error);
+            toast.error(error.message)
         }
     }
 
@@ -76,6 +109,25 @@ const ManageSubjects = () => {
 
     return (
         <React.Fragment>
+
+            {/* Showing Model Conditionally */}
+            <AnimatePresence onExitComplete={onCancelHandler}>
+                {
+                    showModel && (
+                        <Model
+                            onExitComplete={onCancelHandler}
+                            confirm={onDeleteHandler}
+                            message="Subject"
+                        />
+                    )
+                }
+            </AnimatePresence>
+            {/* Showing Toast Notification */}
+            <ToastContainer
+                autoClose={5000}
+                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
+            />
+
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
                     <SelectElement
@@ -98,6 +150,7 @@ const ManageSubjects = () => {
                         filter={onFilterHandler}
                         createExcelFile={createExcelFile}
                         createPdfFile={CreatePDFHandler}
+                        showModel={showModelHandler}
                     />
                 </React.Fragment> : null
             }

@@ -7,8 +7,12 @@ import Row from "../UI/Row/Row";
 import { useSelector } from "react-redux";
 import Table from "../UI/Table/Table";
 import CreatePDF from "../CretaPDF/CreatePDF";
+import { AnimatePresence } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import Model from "../UI/Model/Model";
 
-
+// to store clicked item id
+let selectedItemId;
 
 
 const StudentInfo = props => {
@@ -17,6 +21,35 @@ const StudentInfo = props => {
     const [oldDbData, setOldDbData] = useState([]);
     const [showDbData, setShowDbData] = useState(false);
     const tableHeaders = ["S/N", "Photo", "Name", "Addmission No", "Section", "Email"];
+    const [showModel, setShowModel] = useState(false);
+    // show model
+    const showModelHandler = (id) => {
+        selectedItemId = id;
+        setShowModel(true);
+    }
+
+    // when user press the cancel button we hide the model
+    const onCancelHandler = () => {
+        setShowModel(false);
+    }
+
+    // when user press confirm button we delete the data and hide the model
+    const onDeleteHandler = async () => {
+        setShowModel(false);
+
+        try {
+            await axios.get(`http://localhost:8080/api/admin/students/delete/${selectedItemId}`);
+            toast.success("Student is Deleted");
+            onSubmitHandler();
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+
+
+
+
 
 
     // Fetch Classes from Redux
@@ -29,15 +62,14 @@ const StudentInfo = props => {
 
     // onChange Submit Function
     const onSubmitHandler = async (event) => {
-        event.preventDefault(event);
+        if (event) {
+            event.preventDefault(event);
+        }
         try {
             const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
-            console.log(result);
-            let counter = 0;
             const newArray = result.data.map(singleStudent => {
-                counter++;
                 return [
-                    counter,
+                    singleStudent.id,
                     singleStudent.imageUrl,
                     singleStudent.fullName,
                     singleStudent.addmissionNo,
@@ -50,7 +82,7 @@ const StudentInfo = props => {
             setOldDbData(newArray);
             setShowDbData(true);
         } catch (error) {
-
+            toast.error(error.message);
         }
     }
 
@@ -80,6 +112,23 @@ const StudentInfo = props => {
 
     return (
         <React.Fragment>
+            {/* Showing Model Conditionally */}
+            <AnimatePresence onExitComplete={onCancelHandler}>
+                {
+                    showModel && (
+                        <Model
+                            onExitComplete={onCancelHandler}
+                            confirm={onDeleteHandler}
+                            message="Student"
+                        />
+                    )
+                }
+            </AnimatePresence>
+            {/* Showing Toast Notification */}
+            <ToastContainer
+                autoClose={5000}
+                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
+            />
             <Form onSubmit={onSubmitHandler} className="Left">
                 <Row>
                     <SelectElement
@@ -100,6 +149,7 @@ const StudentInfo = props => {
                         filter={onFilterHandler}
                         createExcelFile={createExcelFile}
                         createPdfFile={CreatePDFHandler}
+                        showModel={showModelHandler}
                     />
                 </React.Fragment> : null
             }
