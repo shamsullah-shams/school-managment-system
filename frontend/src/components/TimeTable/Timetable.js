@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Card from "../UI/Card/Card";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Row from "../UI/Row/Row";
 import "./Timetable.css";
 import CreateTimeTable from "./CreateTimeTable";
 import ManageTimeTables from "./ManageTimeTables";
+import Title from "../UI/Title/Title";
 
 
 
@@ -24,22 +26,25 @@ const Timetable = () => {
 
 
     return (
-        <main className="Main">
-            <Card card title="Manage Timetables">
-                <Row>
-                    <div className="Buutons__Group">
-                        <button className={createTimeTable ? "active__button" : ""} onClick={createTimeTableHandler}>Create Timetable</button>
-                        <button className={manageTimeTables ? "active__button" : ""} onClick={manageTimeTablesHandler}>Manage Timetables</button>
-                    </div>
-                </Row>
-                {
-                    createTimeTable ? <CreateTimeTable /> : null
-                }
-                {
-                    manageTimeTables ? <ManageTimeTables /> : null
-                }
-            </Card>
-        </main>
+        <Grid item xs={12}>
+            <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+                <Title>Manage Timetable</Title>
+                <main>
+                    <Row>
+                        <div className="Buutons__Group">
+                            <button className={createTimeTable ? "active__button" : ""} onClick={createTimeTableHandler}>Create Timetable</button>
+                            <button className={manageTimeTables ? "active__button" : ""} onClick={manageTimeTablesHandler}>Manage Timetables</button>
+                        </div>
+                    </Row>
+                    {
+                        createTimeTable ? <CreateTimeTable /> : null
+                    }
+                    {
+                        manageTimeTables ? <ManageTimeTables /> : null
+                    }
+                </main>
+            </Paper>
+        </Grid>
     );
 };
 

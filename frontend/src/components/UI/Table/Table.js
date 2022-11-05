@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { GrEdit, } from "react-icons/gr";
 import { FiSearch, FiEye, FiTrash2, } from "react-icons/fi";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
 import "./Table.css";
 
 
@@ -55,58 +62,52 @@ const Table = props => {
             <hr />
 
             {
-                <table>
-                    <thead>
-                        <tr>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
                             {
                                 props.tableHeaders.map(singleHeader => (
-                                    <th key={singleHeader}>{singleHeader}</th>
+                                    <TableCell key={singleHeader}>{singleHeader}</TableCell>
                                 ))
                             }
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {
                             props.tableBody.map(SingleObject => {
                                 return (
-                                    <React.Fragment key={SingleObject[0]}>
-                                        <tr>
-                                            <td colSpan={props.tableHeaders.length + 1}>
-                                                <hr />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            {
-                                                SingleObject.map(SingleProperty => {
-                                                    if (SingleProperty.toString().includes("backend")) {
-                                                        return (
-                                                            <td key={SingleProperty} className="Table__Image">
-                                                                <img
-                                                                    alt=""
-                                                                    src={`http://localhost:8080/${SingleProperty}`}
-                                                                />
-                                                            </td>
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <td key={SingleProperty}>{SingleProperty}</td>
-                                                        )
-                                                    }
-                                                })
-                                            }
-                                            <td>
-                                                <GrEdit />
-                                                <FiEye />
-                                                <FiTrash2 onClick={() => { props.showModel(SingleObject[0]) }} />
-                                            </td>
-                                        </tr>
-                                    </React.Fragment>
+
+                                    <TableRow key={SingleObject[0]}>
+                                        {
+                                            SingleObject.map(SingleProperty => {
+                                                if (SingleProperty.toString().includes("backend")) {
+                                                    return (
+                                                        <TableCell key={SingleProperty} className="Table__Image">
+                                                            <img
+                                                                alt=""
+                                                                src={`http://localhost:8080/${SingleProperty}`}
+                                                            />
+                                                        </TableCell>
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <TableCell key={SingleProperty}>{SingleProperty}</TableCell>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                        <TableCell>
+                                            <GrEdit />
+                                            <FiEye />
+                                            <FiTrash2 onClick={() => { props.showModel(SingleObject[0]) }} />
+                                        </TableCell>
+                                    </TableRow>
                                 )
                             })
                         }
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             }
         </React.Fragment>
     );

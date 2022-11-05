@@ -10,10 +10,12 @@ import "./AdmitStudent.css";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+let admitstd = 0;
 
 
 const AdmitStudent = props => {
 
+    console.log("Admit std : ", ++admitstd);
     // @@ Fetch Classes, Parents, Sections from Redux
     const classes = useSelector(state => state.loadTeachers.Classes);
     const parents = useSelector(state => state.loadTeachers.Parents);

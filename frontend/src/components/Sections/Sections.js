@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import Card from "../UI/Card/Card";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Row from "../UI/Row/Row";
 import CreateSection from "./CreateSection";
 import ManageSections from "./ManageSections";
+import Title from "../UI/Title/Title";
 
 
 
@@ -24,22 +26,25 @@ const Sections = props => {
 
 
     return (
-        <main className="Main">
-            <Card card title="Manage Sections">
-                <Row>
-                    <div className="Buutons__Group">
-                        <button className={createSection ? "active__button" : ""} onClick={createSectionHandler}>Create Section</button>
-                        <button className={manageSections ? "active__button" : ""} onClick={manageSectionsHandler}>Manage Sections</button>
-                    </div>
-                </Row>
-                {
-                    createSection ? <CreateSection /> : null
-                }
-                {
-                    manageSections ? <ManageSections /> : null
-                }
-            </Card>
-        </main>
+        <Grid item xs={12}>
+            <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+                <Title>Manage Sections</Title>
+                <main>
+                    <Row>
+                        <div className="Buutons__Group">
+                            <button className={createSection ? "active__button" : ""} onClick={createSectionHandler}>Create Section</button>
+                            <button className={manageSections ? "active__button" : ""} onClick={manageSectionsHandler}>Manage Sections</button>
+                        </div>
+                    </Row>
+                    {
+                        createSection ? <CreateSection /> : null
+                    }
+                    {
+                        manageSections ? <ManageSections /> : null
+                    }
+                </main>
+            </Paper>
+        </Grid>
     );
 };
 

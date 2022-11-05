@@ -1,80 +1,29 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Context from "./Cotext";
 
+// @@ Lazy Loading
+const Students = React.lazy(() => import("./components/Students/Students"));
+const TimeTable = React.lazy(() => import("./components/TimeTable/Timetable"));
+const Users = React.lazy(() => import("./components/Users/Users"));
+const Classes = React.lazy(() => import("./components/Classes/Classes"));
+const Sections = React.lazy(() => import("./components/Sections/Sections"));
+const Administrative = React.lazy(() => import("./components/Administrative/Administrative"));
+const Exams = React.lazy(() => import("./components/Exams/Exams"));
+const Subjects = React.lazy(() => import("./components/Subjects/Subjects"));
+const ManageAccount = React.lazy(() => import("./components/MyAccount/MyAccount"));
+
+
+
 function App() {
-  const [showSideBarSpans, setShowSideBarSpans] = useState(true);
-
-
-
 
   return (
-    <Context.Provider value={{ showSideBarSpans, setShowSideBarSpans }}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/academics"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/users"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/sections"
-            element={<Dashboard />}
-          />
-          <Route path="/classes"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/exams"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/students"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/myaccount"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/subjects"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/administrative"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/admitstudent"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/studentinfo"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/graduatedstudents"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/studentpromotion"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/dormitories"
-            element={<Dashboard />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </Context.Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

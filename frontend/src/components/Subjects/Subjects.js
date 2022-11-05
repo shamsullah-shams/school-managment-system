@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import Card from "../UI/Card/Card";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Row from "../UI/Row/Row";
 import AddSubject from "./AddSubject";
 import ManageSubjects from "./ManageSubjects";
+import Title from "../UI/Title/Title";
 
 
 
@@ -23,22 +25,26 @@ const Subjects = props => {
 
 
     return (
-        <main className="Main">
-            <Card card title="Manage Subjects">
-                <Row>
-                    <div className="Buutons__Group">
-                        <button className={addSubject ? "active__button" : ""} onClick={addSubjectHandler}>Add Subject</button>
-                        <button className={manageSubjects ? "active__button" : ""} onClick={manageSubjectsHandler}>Manage Subjects</button>
-                    </div>
-                </Row>
-                {
-                    addSubject ? <AddSubject /> : null
-                }
-                {
-                    manageSubjects ? <ManageSubjects /> : null
-                }
-            </Card>
-        </main>
+        <Grid item xs={12}>
+            <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+                <main >
+                    <Title>Manage Subjects</Title>
+                    <Row>
+                        <div className="Buutons__Group">
+                            <button className={addSubject ? "active__button" : ""} onClick={addSubjectHandler}>Add Subject</button>
+                            <button className={manageSubjects ? "active__button" : ""} onClick={manageSubjectsHandler}>Manage Subjects</button>
+                        </div>
+                    </Row>
+                    {
+                        addSubject ? <AddSubject /> : null
+                    }
+                    {
+                        manageSubjects ? <ManageSubjects /> : null
+                    }
+
+                </main>
+            </Paper>
+        </Grid>
     );
 };
 

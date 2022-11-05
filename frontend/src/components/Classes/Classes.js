@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Card from "../UI/Card/Card";
 import Row from "../UI/Row/Row";
-import "../Administrative.css";
 import CreateClass from "./CreateClass";
 import ManageClasses from "./ManageClasses";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Title from "../UI/Title/Title";
+import "../Root.css"
 
 
 
@@ -26,22 +28,25 @@ const Classes = props => {
 
 
     return (
-        <main className="Main">
-            <Card card title="Manage Classes">
-                <Row>
-                    <div className="Buutons__Group">
-                        <button className={createClass ? "active__button" : ""} onClick={createClassHandler}>Create Class</button>
-                        <button className={manageClasses ? "active__button" : ""} onClick={manageClassesHandler}>Manage Class</button>
-                    </div>
-                </Row>
-                {
-                    createClass ? <CreateClass /> : null
-                }
-                {
-                    manageClasses ? <ManageClasses /> : null
-                }
-            </Card>
-        </main>
+        <Grid item xs={12}>
+            <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+                <Title>Manage Classes</Title>
+                <main className="Main">
+                    <Row>
+                        <div className="Buutons__Group">
+                            <button className={createClass ? "active__button" : ""} onClick={createClassHandler}>Create Class</button>
+                            <button className={manageClasses ? "active__button" : ""} onClick={manageClassesHandler}>Manage Class</button>
+                        </div>
+                    </Row>
+                    {
+                        createClass ? <CreateClass /> : null
+                    }
+                    {
+                        manageClasses ? <ManageClasses /> : null
+                    }
+                </main>
+            </Paper>
+        </Grid>
     );
 };
 
