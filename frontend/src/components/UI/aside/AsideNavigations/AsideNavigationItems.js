@@ -9,54 +9,98 @@ import { HiUsers } from "react-icons/hi"
 import { SiGoogleclassroom } from "react-icons/si"
 import { ImBooks } from "react-icons/im";
 import { RiAccountCircleLine } from "react-icons/ri";
-import Span from "./Span";
+
+
+import ListItemButton from '@mui/material/ListItemButton';
+import Divider from '@mui/material/Divider';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
 
 const AsideNavigationItems = () => {
 
-
-
-
     return (
-        <nav className="AsideNavigationItems">
+        <nav>
             <NavLink to="/" className="Links" end>
-                <AiOutlineHome />
-                <Span title="Dashboard" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <AiOutlineHome />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/academics" className="Links">
-                <HiAcademicCap />
-                <Span title="Academics" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <HiAcademicCap />
+                    </ListItemIcon>
+                    <ListItemText primary="Academics" />
+                </ListItemButton>
             </NavLink>
             <NavLink className="Links" to="/administrative">
-                <MdOutlineAdminPanelSettings />
-                <Span title="Administrative" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <MdOutlineAdminPanelSettings />
+                    </ListItemIcon>
+                    <ListItemText primary="Administrative" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/students" className="Links">
-                <FaUsers />
-                <Span title="Students" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <FaUsers />
+                    </ListItemIcon>
+                    <ListItemText primary="Students" />
+                </ListItemButton>
             </NavLink>
+            <Divider sx={{ my: 1 }} />
             <NavLink to="/users" className="Links">
-                <HiUsers />
-                <Span title="Users" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <HiUsers />
+                    </ListItemIcon>
+                    <ListItemText primary="Users" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/classes" className="Links">
-                <SiGoogleclassroom />
-                <Span title="Classes" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <SiGoogleclassroom />
+                    </ListItemIcon>
+                    <ListItemText primary="Classes" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/sections" className="Links">
-                <HiChartBar />
-                <Span title="Sections" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <HiChartBar />
+                    </ListItemIcon>
+                    <ListItemText primary="Sections" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/subjects" className="Links">
-                <MdLocationOn />
-                <Span title="Subjects" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <MdLocationOn />
+                    </ListItemIcon>
+                    <ListItemText primary="Subjects" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/exams" className="Links">
-                <ImBooks />
-                <Span title="Exams" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <ImBooks />
+                    </ListItemIcon>
+                    <ListItemText primary="Exams" />
+                </ListItemButton>
             </NavLink>
             <NavLink to="/myaccount" className="Links">
-                <RiAccountCircleLine />
-                <Span title="My Account" />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <RiAccountCircleLine />
+                    </ListItemIcon>
+                    <ListItemText primary="Manage Account" />
+                </ListItemButton>
             </NavLink>
         </nav>
     );
