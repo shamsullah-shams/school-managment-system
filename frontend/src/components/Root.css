@@ -28,12 +28,17 @@
 }
 
 
-.Buutons__Group>button:hover,
-.Buutons__Group>button:active {
-    border: none;
-}
 
 .active__button {
-    border: 1px solid rgb(134, 15, 189) !important;
-    color: rgb(134, 15, 189);
+    border: 1px solid none !important;
+    background-color: rgb(69, 69, 252) !important;
+    color: white;
+    border: 1px solid rgb(69, 69, 252);
+}
+
+.Buutons__Group>button:hover {
+    border: none;
+    color: rgb(69, 69, 252);
+    background-color: white !important;
+    border: 1px solid rgb(69, 69, 252);
 }

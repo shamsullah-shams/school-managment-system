@@ -7,12 +7,13 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Table from "@mui/material/Table";
 
 import "./Table.css";
 
 
 
-const Table = props => {
+const CreateTable = props => {
 
     return (
         <React.Fragment>
@@ -114,4 +115,4 @@ const Table = props => {
 };
 
 
-export default Table;
+export default CreateTable;
