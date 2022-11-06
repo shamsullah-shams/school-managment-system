@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
@@ -40,7 +40,7 @@ const ManageUsers = () => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/users/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/users/delete/${selectedItemId}`);
             onSubmitHandler();
             toast.success("User is Deleted");
         } catch (error) {
@@ -65,7 +65,7 @@ const ManageUsers = () => {
             event.preventDefault(event);
         }
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/users/${selectedType}`);
+            const result = await axios.get(`/api/admin/users/${selectedType}`);
 
             const newArray = result.data.map(SingleObject => {
                 return [
@@ -127,7 +127,6 @@ const ManageUsers = () => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>

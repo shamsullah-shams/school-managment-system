@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import Row from "../UI/Row/Row";
 import InputElement from "../UI/Form/FormElement/InputElement";
@@ -11,7 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
+const CREATE_USER_URL = "/api/admin/users/ragister";
 
 const CreateUser = props => {
     const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const CreateUser = props => {
 
 
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/users/ragister", formData);
+            const result = await axios.post(CREATE_USER_URL, formData);
             if (result.status === 200) {
                 // Clear Old Values
                 let newObject = {};
@@ -82,7 +82,6 @@ const CreateUser = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form onSubmit={onSubmitHandler}>
                 <Row>

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import Form from "../UI/Form/Form";
 import Row from "../UI/Row/Row";
-import axios from "axios";
+import axios from "../../api/axios";
 import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
+// URLS
+const PROMOTE_STUDENT_URL = "/api/admin/students/promote";
 
 const StudentPromotion = props => {
     const [data, setData] = useState({
@@ -38,7 +39,7 @@ const StudentPromotion = props => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/students/promote", data);
+            const result = await axios.post(PROMOTE_STUDENT_URL, data);
             if (result.status === 200) {
                 // clear old values
                 let newObject = {};

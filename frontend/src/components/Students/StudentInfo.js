@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
@@ -38,7 +38,7 @@ const StudentInfo = props => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/students/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/students/delete/${selectedItemId}`);
             toast.success("Student is Deleted");
             onSubmitHandler();
         } catch (error) {
@@ -66,7 +66,7 @@ const StudentInfo = props => {
             event.preventDefault(event);
         }
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
+            const result = await axios.get(`/api/admin/students/${selectedClass}`);
             const newArray = result.data.map(singleStudent => {
                 return [
                     singleStudent.id,
@@ -127,7 +127,6 @@ const StudentInfo = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form onSubmit={onSubmitHandler} className="Left">
                 <Row>

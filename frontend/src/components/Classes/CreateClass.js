@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
@@ -10,10 +10,9 @@ import { loadTeacher } from "../../Redux/actions/Teacher";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
+// URLS 
+const CREATE_CLASS_URL = "/api/admin/classes/create";
 const CreateClass = props => {
-
-
 
     const [newClass, setNewClass] = useState({
         name: "",
@@ -35,7 +34,7 @@ const CreateClass = props => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/classes/create", {
+            const result = await axios.post(CREATE_CLASS_URL, {
                 newClass: newClass,
             });
             console.log(result);
@@ -62,7 +61,6 @@ const CreateClass = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" >
                 <Row>

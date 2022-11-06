@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
@@ -40,7 +40,7 @@ const ManageSections = props => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/sections/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/sections/delete/${selectedItemId}`);
             onSubmitHandler();
             toast.success("Time Table is Deleted");
         } catch (error) {
@@ -69,7 +69,7 @@ const ManageSections = props => {
             event.preventDefault();
         }
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/sections/${selectedClass}`);
+            const result = await axios.get(`/api/admin/sections/${selectedClass}`);
             const newArray = result.data.map(SingleObject => {
                 return [
                     SingleObject.id,
@@ -126,7 +126,6 @@ const ManageSections = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Row from "../UI/Row/Row";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
@@ -11,6 +11,8 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 let admitstd = 0;
+// URLS
+const ADMIT_STUDENT_URL = "/api/admin/student/ragister";
 
 
 const AdmitStudent = props => {
@@ -69,7 +71,7 @@ const AdmitStudent = props => {
         }
 
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/student/ragister", formData);
+            const result = await axios.post(ADMIT_STUDENT_URL, formData);
             if (result.status === 200) {
                 // clear old values
                 let newObject = {};
@@ -95,7 +97,6 @@ const AdmitStudent = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
 
             <Form onSubmit={onSubmitHandler}>

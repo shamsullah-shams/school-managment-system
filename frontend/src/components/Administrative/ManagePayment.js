@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
@@ -39,7 +39,7 @@ const ManagePayments = () => {
     const onDeleteHandler = async () => {
         setShowModel(false);
         try {
-            await axios.get(`http://localhost:8080/api/admin/payment/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/payment/delete/${selectedItemId}`);
             toast.success("Payment is Deleted");
             onSubmitHandler();
         } catch (error) {
@@ -65,7 +65,7 @@ const ManagePayments = () => {
             event.preventDefault(event);
         }
         try {
-            const yearPayments = await axios.get(`http://localhost:8080/api/admin/payments/${getYear}`);
+            const yearPayments = await axios.get(`/api/admin/payments/${getYear}`);
             setExcelData(yearPayments.data);
             setShowDbData(true);
             const newArray = yearPayments.data.map(SO => {
@@ -131,7 +131,6 @@ const ManagePayments = () => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>

@@ -4,13 +4,13 @@ import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
-import axios from "axios";
+import axios from "../../api/axios";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
+const CREATE_TIMETABLE_URL = "/api/admin/timetable/create";
 
 const CreateTimeTable = props => {
 
@@ -37,7 +37,7 @@ const CreateTimeTable = props => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/timetable/create", {
+            const result = await axios.post(CREATE_TIMETABLE_URL, {
                 timeTable: timeTable,
             })
             if (result.status === 200) {
@@ -62,7 +62,6 @@ const CreateTimeTable = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>

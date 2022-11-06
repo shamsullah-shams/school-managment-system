@@ -5,6 +5,7 @@ import Row from "../UI/Row/Row";
 import AddSubject from "./AddSubject";
 import ManageSubjects from "./ManageSubjects";
 import Title from "../UI/Title/Title";
+import "../Root.css";
 
 
 

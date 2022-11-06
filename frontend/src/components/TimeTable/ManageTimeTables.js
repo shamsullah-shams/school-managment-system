@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Table from "../UI/Table/Table";
 import CreatePDF from "../CretaPDF/CreatePDF";
 import { AnimatePresence } from "framer-motion";
@@ -10,6 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 // to store clicked item id
 let selectedItemId;
+const GET_ALL_TIMETABLES_URL = "/api/admin/timetable/getalltimetables";
 
 const ManageTimeTables = props => {
 
@@ -36,7 +37,7 @@ const ManageTimeTables = props => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/timetable/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/timetable/delete/${selectedItemId}`);
             setSendRequest(!sendRequest);
             toast.success("Time Table is Deleted");
         } catch (error) {
@@ -52,7 +53,7 @@ const ManageTimeTables = props => {
     useEffect(() => {
         const getDbTimeTables = async () => {
             try {
-                const data = await axios.get("http://localhost:8080/api/admin/timetable/getalltimetables");
+                const data = await axios.get(GET_ALL_TIMETABLES_URL);
                 setTimeTable(data.data);
                 setOldDbData(data.data);
             } catch (error) {
@@ -106,7 +107,6 @@ const ManageTimeTables = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Table
                 tableHeaders={timeTableHeaders}

@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Row from "../UI/Row/Row";
 import "./Timetable.css";
+import "../Root.css";
 import CreateTimeTable from "./CreateTimeTable";
 import ManageTimeTables from "./ManageTimeTables";
 import Title from "../UI/Title/Title";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
@@ -9,10 +9,10 @@ import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+// URLS
+const CREATE_PAYMENT_URL = "/api/admin/payment/create";
 
 const CreatePayments = () => {
-
-
 
     const [payment, setPayment] = useState({
         title: "",
@@ -34,7 +34,7 @@ const CreatePayments = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/payment/create", {
+            const result = await axios.post(CREATE_PAYMENT_URL, {
                 payment: payment,
             })
             if (result.status === 200) {
@@ -60,7 +60,6 @@ const CreatePayments = () => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>

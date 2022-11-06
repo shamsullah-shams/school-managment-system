@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import Buttons from "../UI/Button/Buttons";
 import Form from "../UI/Form/Form";
@@ -44,7 +44,7 @@ const ManageSubjects = () => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/subjects/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/subjects/delete/${selectedItemId}`);
             onSubmitHandler();
             toast.success("Subject is Deleted");
         } catch (error) {
@@ -65,7 +65,7 @@ const ManageSubjects = () => {
             event.preventDefault();
         }
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/subjects/${selectedClass}`);
+            const result = await axios.get(`/api/admin/subjects/${selectedClass}`);
             const newArray = result.data.map(SingleObject => {
                 return [
                     SingleObject.id,
@@ -125,7 +125,6 @@ const ManageSubjects = () => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
 
             <Form className="Left" onSubmit={onSubmitHandler}>

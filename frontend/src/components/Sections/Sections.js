@@ -5,6 +5,7 @@ import Row from "../UI/Row/Row";
 import CreateSection from "./CreateSection";
 import ManageSections from "./ManageSections";
 import Title from "../UI/Title/Title";
+import "../Root.css";
 
 
 

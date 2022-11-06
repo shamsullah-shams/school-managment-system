@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Table from "../UI/Table/Table";
 import CreatePDF from "../CretaPDF/CreatePDF";
 import { AnimatePresence } from "framer-motion";
@@ -11,7 +11,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 // to store clicked item id
 let selectedItemId;
-
+// URLS
+const GET_ALL_CLASSES_URL = "/api/admin/classes/getAll";
 
 
 const ManageClasses = props => {
@@ -37,7 +38,7 @@ const ManageClasses = props => {
         setShowModel(false);
 
         try {
-            await axios.get(`http://localhost:8080/api/admin/classes/delete/${selectedItemId}`);
+            await axios.get(`/api/admin/classes/delete/${selectedItemId}`);
             setSendRequest(!sendRequest);
             toast.success("Time Table is Deleted");
         } catch (error) {
@@ -55,7 +56,7 @@ const ManageClasses = props => {
     useEffect(() => {
         const getDbData = async () => {
             try {
-                const result = await axios.get("http://localhost:8080/api/admin/classes/getAll");
+                const result = await axios.get(GET_ALL_CLASSES_URL);
                 const newArray = result.data.map(SingleObject => {
                     return [
                         SingleObject.id,
@@ -116,7 +117,6 @@ const ManageClasses = props => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Table
                 tableHeaders={tableHeaders}

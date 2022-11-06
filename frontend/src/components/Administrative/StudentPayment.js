@@ -3,7 +3,7 @@ import Form from "../UI/Form/Form";
 import Row from "../UI/Row/Row";
 import Buttons from "../UI/Button/Buttons";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
-import axios from "axios";
+import axios from "../../api/axios";
 import Table from "../UI/Table/Table";
 import { useSelector } from "react-redux";
 import CreatePDF from "../CretaPDF/CreatePDF";
@@ -26,7 +26,7 @@ const StudentPayments = () => {
         event.preventDefault(event);
         // send Request to API //
         try {
-            const result = await axios.get(`http://localhost:8080/api/admin/students/${selectedClass}`);
+            const result = await axios.get(`/api/admin/students/${selectedClass}`);
             let counter = 0;
             const newArray = result.data.map(singleStudent => {
                 counter++;

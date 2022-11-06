@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import Form from "../UI/Form/Form";
 import InputElement from "../UI/Form/FormElement/InputElement";
 import SelectElement from "../UI/Form/FormElement/SelectElement";
@@ -10,7 +10,8 @@ import { loadTeacher } from "../../Redux/actions/Teacher";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
+// URLS
+const CREATE_SECTION_URL = "/api/admin/sections/create";
 
 const CreateSection = () => {
     const [section, setSection] = useState({
@@ -38,7 +39,7 @@ const CreateSection = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault(event);
         try {
-            const result = await axios.post("http://localhost:8080/api/admin/sections/create", { ...section });
+            const result = await axios.post(CREATE_SECTION_URL, { ...section });
             if (result.status === 200) {
                 // clear old values
                 let newObject = {};
@@ -62,7 +63,6 @@ const CreateSection = () => {
             {/* Showing Toast Notification */}
             <ToastContainer
                 autoClose={5000}
-                toastStyle={{ background: "rgb(43, 42, 42)", color: "#fff" }}
             />
             <Form className="Left" onSubmit={onSubmitHandler}>
                 <Row>
