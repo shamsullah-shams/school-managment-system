@@ -17,7 +17,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Route, Routes } from 'react-router-dom';
-import Orders from './Order';
 
 
 
@@ -161,10 +160,7 @@ const Dashboard = () => {
                         <Grid container spacing={3}>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Routes>
-                                    <Route
-                                        path='/'
-                                        element={<Orders />}
-                                    />
+
                                     <Route
                                         path="/academics"
                                         element={<TimeTable />}
